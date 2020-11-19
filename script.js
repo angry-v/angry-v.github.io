@@ -73,7 +73,7 @@ async function main(){
 		"S":1,"A":2,"B":3,"C":4,"D":5
 	}
 	const batterSpecLevelArray = ["S","A","B","C","D"];
-	const pitcherSpecLevelArray = ["S","A","B","C","D"];
+	const pitcherSpecLevelArray = ["S","A"];
 
 	var addStatInfo = await jQuery.getJSON("addStatInfo.json");
 

@@ -189,109 +189,6 @@ button {
     </div> <!-- 홈 -->
 
     <div class="result" id="batterGrowthCalc" style="text-align: center; font-size: 15px;"> <!--타자육성 -->   
-      <div class="subresult" id="basicBatterGrowth">
-        <table align="center">
-          <tr align="center">
-            <th> 특화 </th>
-            <th> 일훈 </th>
-            <th></th>
-            <th> 특화 </th>
-            <th> 일훈 </th>
-            <th></th>
-          </tr>
-          <tr align="center">
-            <td>
-              <select name="b_spec" value="b_con" style="width:40px;">
-                <option>-</option>
-              </select>
-            </td>
-            <td><input type="radio" name="b_drill" value="b_con" style="width:20px;"></td>
-            <td>정확:<input type="number" id="b_con" name="b_bas_stat" step="0.01" value="99.99" min="26.00" max="99.99"></td>
-            <td>
-              <select name="b_spec" value="b_pwr" style="width:40px;">
-                <option>-</option>
-              </select>
-            </td>
-            <td><input type="radio" name="b_drill" value="b_pwr" style="width:20px;"></td>
-            <td>파워:<input type="number" id="b_pwr" name="b_bas_stat" step="0.01" value="99.99" min="26.00" max="99.99"></td>
-          </tr>
-          <tr align="center">
-            <td>
-              <select name="b_spec" value="b_eye" style="width:40px;">
-                <option>-</option>
-              </select>
-            </td>
-            <td><input type="radio" name="b_drill" value="b_eye" style="width:20px;"></td>
-            <td>선구:<input type="number" id="b_eye" name="b_bas_stat" step="0.01" value="99.99" min="26.00" max="99.99"></td>
-            <td>
-              <select name="b_spec" value="b_spd" style="width:40px;">
-                <option>-</option>
-              </select>
-            </td>
-            <td><input type="radio" name="b_drill" value="b_spd" style="width:20px;"></td>
-            <td>주력:<input type="number" id="b_spd" name="b_bas_stat" step="0.01" value="99.99" min="26.00" max="99.99"></td>
-          </tr>
-          <tr align="center">
-            <td>
-              <select name="b_spec" value="b_sta" style="width:40px;" disabled>
-                <option>-</option>
-              </select>
-            </td>
-            <td><input type="radio" name="b_drill" value="b_sta" style="width:20px;"></td>
-            <td>체력:<input type="number" id="b_sta" name="b_bas_stat" step="0.01" value="99.99" min="26.00" max="99.99"></td>
-            <td>
-              <select name="b_spec" value="b_fit" style="width:40px;" disabled>
-                <option>-</option>
-              </select>
-            </td>
-            <td><input type="radio" name="b_drill" value="b_fit" style="width:20px;"></td>
-            <td>건강:<input type="number" id="b_fit" name="b_bas_stat" step="0.01" value="99.99" min="26.00" max="99.99"></td>
-          </tr>
-          <tr align="center">
-            <td>
-              <select name="b_spec" value="b_men" style="width:40px;">
-                <option>-</option>
-              </select>
-            </td>
-            <td><input type="radio" name="b_drill" value="b_men" style="width:20px;"></td>
-            <td>정신:<input type="number" id="b_men" name="b_bas_stat" step="0.01" value="99.99" min="26.00" max="99.99"></td>
-            <td>
-              <select name="b_spec" value="b_def" style="width:40px;">
-                <option>-</option>
-              </select>
-            </td>
-            <td><input type="radio" name="b_drill" value="b_def" style="width:20px;"></td>
-            <td>수비:<input type="number" id="b_def" name="b_bas_stat" step="0.01" value="99.99" min="26.00" max="99.99"></td>
-          </tr>
-        </table>
-        
-        레벨예상: <span id="b_level">10</span>레벨 <span id="b_perc">99</span>(±1)%
-        <button class="normalButton" type="submit" id="b_update" style="width:80px; height:25px;">Update</button>
-        <br>
-        나이:<input type="number" id="b_age" value="18" style="width:50px;" step="1" min="18" max="45">세 (최소 18세, 최대 45세)
-        <br>
-        5타석 경기수:<input type="number" id="b_cha" value="119" style="width:60px;" step="1" min="0" max="119">/ 119 경기
-        <br>
-        <button class="goBackButton" type="submit" id="b_undo">Undo</button>
-        <button class="submitButton" type="submit" id="b_start">Start</button>
-        <button class="normalButton" type="submit" id="b_reset">Reset</button>
-        <br><br>
-        <button class="normalButton" type="submit" id="b_advanced" style="width: 200px;">상세육성 전환</button><br><br>
-        <table id="b_log" style="text-align: center;" align="center">
-          <thead>
-            <tr>
-              <th style="width: 50px;">나이</th>
-              <th style="width: 80px;">특화</th>
-              <th style="width: 50px;">일훈</th>
-              <th style="width: 100px;">5타석 경기수</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-        <div style="text-align: left;">
-          <br>주의: 현재 성장치 데이터의 부족으로 실제 성장치와 예상 성장치가 차이날 수 있습니다.<br>(특히 91구간과 66구간 이하)
-        </div>
-      </div>
       <div class="subresult on" id="detailBatterGrowth">
         <table align="center">
           <tr align="center">
@@ -425,15 +322,12 @@ button {
         <br>
         잔여 정규시즌 5타석 경기수:<input type="number" id="b_adv_cha" value="119" style="width:60px;" step="1" min="0" max="119">/ 총 <input type="number" id="b_adv_total" value="119" style="width:60px;" step="1" min="0" max="119"> 경기
         <br>
-        <button class="normalButton" type="submit" id="load_totalGame" style="width:200px;">잔여경기수 불러오기</button>
-        <br>
         <input type="checkbox" id="b_adv_sat" style="width:20px; height:15px;"> 토요리그 5타석 경기수:<input type="number" id="b_adv_satCha" value="21" style="width:60px;" step="1" min="0" max="21">/ 총 <input type="number" id="b_adv_satTotal" value="21" style="width:60px;" step="1" min="0" max="21"> 경기
         <br>
         <button class="goBackButton" type="submit" id="b_adv_undo">Undo</button>
         <button class="submitButton" type="submit" id="b_adv_start">Start</button>
         <button class="normalButton" type="submit" id="b_adv_reset">Reset</button>
         <br><br>
-        <button class="normalButton" type="submit" id="b_basic" style="width: 200px;">단순육성 전환</button><br><br>
         <table id="b_adv_log" style="text-align: center;" align="center">
           <thead>
             <tr>
@@ -454,109 +348,6 @@ button {
     </div> <!--타자육성 -->
 
     <div class="result" id="pitcherGrowthCalc" style="text-align: center; font-size: 15px;"> <!-- 투수육성 -->
-      <div class="subresult" id="basicPitcherGrowth">
-        <table align="center">
-          <tr align="center">
-            <th> 특화 </th>
-            <th> 일훈 </th>
-            <th></th>
-            <th> 특화 </th>
-            <th> 일훈 </th>
-            <th></th>
-          </tr>
-          <tr align="center">
-            <td>
-              <select name="p_spec" value="p_vel" style="width:40px;">
-                <option>-</option>
-              </select>
-            </td>
-            <td><input type="radio" name="p_drill" value="p_vel" style="width:20px;"></td>
-            <td>구속:<input type="number" name="p_bas_stat" id="p_vel" step="0.01" value="99.99" min="26.00" max="99.99"></td>
-            <td>
-              <select name="p_spec" value="p_pwr" style="width:40px;">
-                <option>-</option>
-              </select>
-            </td>
-            <td><input type="radio" name="p_drill" value="p_pwr" style="width:20px;"></td>
-            <td>구위:<input type="number" name="p_bas_stat" id="p_pwr" step="0.01" value="99.99" min="26.00" max="99.99"></td>
-          </tr>
-          <tr align="center">
-            <td>
-              <select name="p_spec" value="p_brk" style="width:40px;">
-                <option>-</option>
-              </select>
-            </td>
-            <td><input type="radio" name="p_drill" value="p_brk" style="width:20px;"></td>
-            <td>변화:<input type="number" name="p_bas_stat" id="p_brk" step="0.01" value="99.99" min="26.00" max="99.99"></td>
-            <td>
-              <select name="p_spec" value="p_con" style="width:40px;">
-                <option>-</option>
-              </select>
-            </td>
-            <td><input type="radio" name="p_drill" value="p_con" style="width:20px;"></td>
-            <td>제구:<input type="number" name="p_bas_stat" id="p_con" step="0.01" value="99.99" min="26.00" max="99.99"></td>
-          </tr>
-          <tr align="center">
-            <td>
-              <select name="p_spec" value="p_sta" style="width:40px;">
-                <option>-</option>
-              </select>
-            </td>
-            <td><input type="radio" name="p_drill" value="p_sta" style="width:20px;"></td>
-            <td>체력:<input type="number" name="p_bas_stat" id="p_sta" step="0.01" value="99.99" min="26.00" max="99.99"></td>
-            <td>
-              <select name="p_spec" value="p_fit" style="width:40px;" disabled>
-                <option>-</option>
-              </select>
-            </td>
-            <td><input type="radio" name="p_drill" value="p_fit" style="width:20px;"></td>
-            <td>건강:<input type="number" name="p_bas_stat" id="p_fit" step="0.01" value="99.99" min="26.00" max="99.99"></td>
-          </tr>
-          <tr align="center">
-            <td>
-              <select name="p_spec" value="p_men" style="width:40px;">
-                <option>-</option>
-              </select>
-            </td>
-            <td><input type="radio" name="p_drill" value="p_men" style="width:20px;"></td>
-            <td>정신:<input type="number" name="p_bas_stat" id="p_men" step="0.01" value="99.99" min="26.00" max="99.99"></td>
-            <td>
-              <select name="p_spec" value="p_def" style="width:40px;" disabled>
-                <option>-</option>
-              </select>
-            </td>
-            <td><input type="radio" name="p_drill" value="p_def" style="width:20px;"></td>
-            <td>수비:<input type="number" name="p_bas_stat" id="p_def" step="0.01" value="99.99" min="26.00" max="99.99"></td>
-          </tr>
-        </table>
-        
-        레벨예상: <span id="p_level">10</span>레벨 <span id="p_perc">99</span>(±1)%
-        <button class="normalButton" type="submit" id="p_update" style="width:80px; height:25px;">Update</button>
-        <br>
-        나이:<input type="number" id="p_age" value="18" style="width:50px;" step="1" min="18" max="45">세 (최소 18세, 최대 45세)
-        <br>
-        와리:<input type="number" id="p_war" value="1" style="width:50px;" step="0.1" min="0" max="3.3">모 (최소 0모, 최대 3.3모)
-        <br>
-        <button class="goBackButton" type="submit" id="p_undo">Undo</button>
-        <button class="submitButton" type="submit" id="p_start">Start</button>
-        <button class="normalButton" type="submit" id="p_reset">Reset</button>
-        <br><br>
-        <button class="normalButton" type="submit" id="p_advanced" style="width: 200px;">상세육성 전환</button><br><br>
-        <table id="p_log" style="text-align: center;" align="center">
-          <thead>
-            <tr>
-              <th style="width: 50px;">나이</th>
-              <th style="width: 50px;">와리</th>
-              <th style="width: 80px;">특화</th>
-              <th style="width: 50px;">일훈</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-        <div style="text-align: left;">
-          <br>주의: 현재 성장치 데이터의 부족으로 실제 성장치와 예상 성장치가 차이날 수 있습니다.<br>(특히 91구간과 66구간 이하)
-        </div>
-      </div>
       <div class="subresult on" id="detailPitcherGrowth">
         <table align="center">
           <tr align="center">
@@ -772,7 +563,6 @@ button {
         <button class="submitButton" type="submit" id="p_adv_start">Start</button>
         <button class="normalButton" type="submit" id="p_adv_reset">Reset</button>
         <br><br>
-        <button class="normalButton" type="submit" id="p_basic" style="width: 200px;">단순육성 전환</button><br><br>
         <table id="p_adv_log" style="text-align: center;" align="center">
           <thead>
             <tr>

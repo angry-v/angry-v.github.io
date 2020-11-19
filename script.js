@@ -59,6 +59,7 @@ function main(){
 	var addStatInfo = jQuery.getJSON("addStatInfo.json");
 
 	const tabArray = [ // 반드시 탭 순서대로 넣을 것
+		document.getElementById("home"),
 		document.getElementById("batterGrowthCalc"),
 		document.getElementById("pitcherGrowthCalc")
 	]
@@ -75,6 +76,8 @@ function main(){
 			idx = buttons.indexOf(this);
 			tabArray[idx].classList.toggle('on',true);
 			switch(this.id){
+				case "homeBtn": // 홈
+					break;
 				case "batterBtn": // 타자육성
 					b_calculateStat([],false);
 					break;
@@ -84,9 +87,6 @@ function main(){
 			}
 		}
 	}
-	
-	b_calculateStat([],false);
-	p_calculateStat([],false);
 
 	// 타자 육성 시작
 

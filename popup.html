@@ -1,0 +1,2225 @@
+﻿<head>
+  <meta charset="UTF-8">
+<style>
+  
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans+KR:500,400);
+BODY {
+  width: 780px; min-height: 500px; font-family: 'Noto Sans KR', sans-serif; line-height: 25px;
+}
+input {
+  border: none; width:70px; height: 25px;
+  font-size:18px; font-family: 'Noto Sans KR', sans-serif; text-align:center; margin: 5px 5px;
+}
+input:focus {
+  border-bottom: 2px solid #2f5a69;
+}
+input[type=checkbox] {
+  width: 15px; height: 15px; vertical-align: center;
+}
+
+div.hide {
+  display: none;
+}
+
+.playerCard {
+  float: left;
+  width: 160px;
+  height: 90px;
+  background-color: lightgreen;
+  margin: 5px;
+  padding: 5px;
+  line-height: 1;
+}
+.playerCard.left {
+  clear: left;
+}
+.playerCard.sub {
+  background-color: lightblue;
+}
+.playerCard.dummy {
+  background-color: white;
+}
+.playerSelect {
+  width: 100px;
+  font-size: 11px;
+}
+.playerSelect.sub {
+  width: 90px;
+}
+.playerSelect.pit {
+  width: 85px;
+}
+.playerSelectOption {
+  font-size: 11px;
+}
+.playerStat {
+  width: 100px;
+  font-size: 13px;
+  line-height: 1;
+}
+.playerImg {
+  height: 70px;
+}
+.playerGradeImg {
+  height: 15px;
+}
+.playerGradeImgDiv {
+  position: relative;
+  top: -15px;
+  left: 39.5px;
+}
+.playerBreakLimitImg {
+  height: 70px;
+}
+
+button {
+  background:none;
+  font-family: 'Open Sans', sans-serif;
+  border:0;
+  outline:0;
+  cursor:pointer;
+}
+.menuBox {
+  display:flex;
+}
+.menuButton {
+  width:130px;
+  height:40px;
+  transition:0.3s all;
+}
+.menuButton.on {
+  border-bottom:2px solid #df0000;
+  font-weight:700;
+  color:#df0000;
+}
+.menuButton:hover {
+  color:#df0000;
+}
+.submenuButton {
+  width:130px;
+  height:40px;
+  transition:0.3s all;
+}
+.submenuButton.on {
+  border-bottom:2px solid #0000df;
+  font-weight:700;
+  color:#0000df;
+}
+.submenuButton:hover {
+  color:#0000df;
+}
+.result {
+  display:none;
+  padding:20px;
+}
+.result.on {
+  display:block;
+}
+.subresult {
+  display:none;
+}
+.subresult.on {
+  display:block;
+}
+.submitButton {
+  width: 100px;
+  height: 40px;
+  background: linear-gradient(to bottom, #4eb5e5 0%,#389ed5 100%); /* W3C */
+  border: none;
+  border-radius: 5px;
+  position: relative;
+  border-bottom: 4px solid #2b8bc6;
+  color: #fbfbfb;
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.4);
+  font-size: 15px;
+  text-align: left;
+  text-indent: 5px;
+  box-shadow: 0px 3px 0px 0px rgba(0,0,0,.2);
+  cursor: pointer;
+}
+.submitButton:active {
+  box-shadow: 0px 2px 0px 0px rgba(0,0,0,.2);
+  top: 1px;
+}
+.submitButton:after {
+  content: "";
+  width: 0;
+  height: 0;
+  display: block;
+  border-top: 20px solid #187dbc;
+  border-bottom: 20px solid #187dbc;
+  border-left: 16px solid transparent;
+  border-right: 20px solid #187dbc;
+  position: absolute;
+  opacity: 0.6; 
+  right: 0;
+  top: 0;
+  border-radius: 0 5px 5px 0;  
+}
+.goBackButton {
+  width: 100px;
+  height: 40px;
+  background: linear-gradient(to bottom, #4eb5e5 0%,#389ed5 100%); /* W3C */
+  border: none;
+  border-radius: 5px;
+  position: relative;
+  border-bottom: 4px solid #2b8bc6;
+  color: #fbfbfb;
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.4);
+  font-size: 15px;
+  text-indent: 5px;
+  box-shadow: 0px 3px 0px 0px rgba(0,0,0,.2);
+  cursor: pointer;
+  text-align: right;
+  padding-right: 12px;
+  box-sizing: border-box;
+}
+.goBackButton:active {
+  box-shadow: 0px 2px 0px 0px rgba(0,0,0,.2);
+  top: 1px;
+}
+.goBackButton:after {
+  content: "";
+  width: 0;
+  height: 0;
+  display: block;
+  border-top: 20px solid #187dbc;
+  border-bottom: 20px solid #187dbc;
+  border-right: 16px solid transparent;
+  border-left: 20px solid #187dbc;
+  position: absolute;
+  opacity: 0.6; 
+  left: 0;
+  top: 0;
+  border-radius: 5px 0 0 5px;    
+}
+.normalButton {
+  width: 100px;
+  height: 40px;
+  background: linear-gradient(to bottom, #4eb5e5 0%,#389ed5 100%); /* W3C */
+  border: none;
+  border-radius: 5px;
+  position: relative;
+  border-bottom: 4px solid #2b8bc6;
+  color: #fbfbfb;
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.4);
+  font-size: 15px;
+  box-shadow: 0px 3px 0px 0px rgba(0,0,0,.2);
+  cursor: pointer;
+  text-align: center;
+  text-indent: 0;
+  vertical-align: middle;
+}
+.normalButton:active {
+  box-shadow: 0px 2px 0px 0px rgba(0,0,0,.2);
+  top: 1px;
+}
+.normalButton:after{
+  display: none;
+}
+
+.sort {
+  width: 20px;
+  padding: 1px;
+}
+
+</style>
+</head>
+
+<body>
+  <div id="systemText" style="position:fixed; z-index: 4;">
+    System text: <span id="systemTextContent"></span>
+  </div> <!-- 시스템 텍스트 -->
+
+  <div class="menuBox" style="position:fixed; top:30px; z-index: 3;">
+    <button class="menuButton on" id="homeBtn" type="button">홈</button>
+    <button class="menuButton" id="searchBtn" type="button">선수검색</button>
+    <button class="menuButton" id="manageBtn" type="button">보유선수관리</button>
+    <button class="menuButton" id="batterBtn" type="button">육성계산기(타자)</button>
+    <button class="menuButton" id="pitcherBtn" type="button">육성계산기(투수)</button>
+    <!-- <button class="menuButton" type="button">이닝계산기</button> -->
+    <button class="menuButton" id="lineupBtn" type="button">라인업 자랑하기</button>
+  </div> <!-- menuBox -->
+
+  <div style="position:fixed; top:-10px; z-index: 2;">
+    <img src="/images/background.png">
+  </div>
+
+  <div class="mainFrame" style="position:relative; top:50px; z-index: 1;">
+    <div class="result on" id="home"> <!-- 홈 -->
+      원하시는 메뉴를 선택하세요!<br><br>
+      현재 리그: <span id="currLeagueLevel"></span><br>
+      현재 스폰서: <span id="currSponsorName"></span> (<span id="currSponsorWeek">0</span>주차)<br>
+      * 현재 진행중인 순서 (벅스 5주 - 티켓링크 5주) 기준입니다. 스폰서가 바뀔 경우 실제와 달라질 수 있습니다.
+    </div> <!-- 홈 -->
+
+    <div class="result" id="searchPlayers" style="text-align: center; font-size: 15px;"> <!-- 선수검색 -->
+      <div style="position:fixed; top:50px; z-index: 2;">
+        <img src="/images/background.png">
+      </div>
+      <div class="submenuBox" style="position:fixed; top:80px; padding:0px 0px 10px; width:740px; z-index: 3;">
+        <button class="submenuButton on" style="margin:0 auto;" id="myPlayerSearchBtn" type="button">보유선수검색</button>
+        <button class="submenuButton" style="margin:0 auto;" id="invenPlayerSearchBtn" type="button">일반선수검색</button>
+        <button class="submenuButton" style="margin:0 auto;" id="topPlayerSearchBtn" type="button">T선수검색</button>
+      </div>
+      <div class="subresult on" style="position:relative; top:60px;" id="searchMyPlayers">
+        이름으로 검색: <input type="text" id="targetMyPlayerName" style="width: 200px; background-color: #8dcfe6; vertical-align: middle;">
+        <button class="normalButton" type="submit" id="myPlayerFetchBtn" style="width: 100px; height: 30px;">불러오기</button><br>
+        <input type="checkbox" id="starOnly"> 관심선수만 표시
+        <br>
+        <table align="center">
+          <tr>
+            <th style="width: 120px;">레벨</th>
+            <th style="width: 120px;">나이</th>
+          </tr>
+          <tr>
+            <td style="text-align: center;">
+              <input type="text" id="myMinLevel" value="1" style="width: 25px;">~<input type="text" id="myMaxLevel" value="11" style="width: 25px;">
+            </td>
+            <td style="text-align: center;">
+              <input type="text" id="myMinAge" value="18" style="width: 25px;">~<input type="text" id="myMaxAge" value="45" style="width: 25px;">
+            </td>
+          </tr>
+        </table>
+        <br>
+        <span style="text-align: left; font-weight: 600;">선수명을 클릭하면 관리 화면으로 이동합니다.</span>
+        <br>
+        <div id="myBatterResult">
+          <h3>보유 선수 (타자)</h3>
+          <table id="myBatterTable" style="text-align: center;" align="center">
+            <thead>
+              <tr>
+                <th style="width: 100px;">선수명<br><button class="sort b_inc" data-value="name">▲</button><button class="sort b_dec" data-value="name">▼</button></th>
+                <th style="width: 100px;">탄생특<br><button class="sort b_inc" data-value="string">▲</button><button class="sort b_dec" data-value="string">▼</button></th>
+                <th style="width: 50px;">관심<br><button class="sort b_inc" data-value="string">▲</button><button class="sort b_dec" data-value="string">▼</button></th>
+                <th style="width: 70px;">레벨<br><button class="sort b_inc" data-value="level">▲</button><button class="sort b_dec" data-value="level">▼</button></th>
+                <th style="width: 70px;">나이<br><button class="sort b_inc" data-value="age">▲</button><button class="sort b_dec" data-value="age">▼</button></th>
+                <th style="width: 50px;">일훈<br><button class="sort b_inc" data-value="string">▲</button><button class="sort b_dec" data-value="string">▼</button></th>
+                <th style="width: 50px;">경험<br><button class="sort b_inc" data-value="number">▲</button><button class="sort b_dec" data-value="number">▼</button></th>
+                <th style="width: 50px;">한계<br><button class="sort b_inc" data-value="number">▲</button><button class="sort b_dec" data-value="number">▼</button></th>
+                <th style="width: 70px;">획득경로<br><button class="sort b_inc" data-value="string">▲</button><button class="sort b_dec" data-value="string">▼</button></th>
+                <th style="width: 80px;">상태/방출<br><button class="sort b_inc" data-value="string">▲</button><button class="sort b_dec" data-value="string">▼</button></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <br>
+        <div id="myPitcherResult">
+          <h3>보유 선수 (투수)</h3>
+          <table id="myPitcherTable" style="text-align: center;" align="center">
+            <thead>
+              <tr>
+                <th style="width: 100px;">선수명<br><button class="sort p_inc" data-value="name">▲</button><button class="sort p_dec" data-value="name">▼</button></th>
+                <th style="width: 100px;">탄생특<br><button class="sort p_inc" data-value="string">▲</button><button class="sort p_dec" data-value="string">▼</button></th>
+                <th style="width: 50px;">관심<br><button class="sort p_inc" data-value="string">▲</button><button class="sort p_dec" data-value="string">▼</button></th>
+                <th style="width: 70px;">레벨<br><button class="sort p_inc" data-value="level">▲</button><button class="sort p_dec" data-value="level">▼</button></th>
+                <th style="width: 70px;">나이<br><button class="sort p_inc" data-value="age">▲</button><button class="sort p_dec" data-value="age">▼</button></th>
+                <th style="width: 50px;">일훈<br><button class="sort p_inc" data-value="string">▲</button><button class="sort p_dec" data-value="string">▼</button></th>
+                <th style="width: 50px;">경험<br><button class="sort p_inc" data-value="number">▲</button><button class="sort p_dec" data-value="number">▼</button></th>
+                <th style="width: 50px;">한계<br><button class="sort p_inc" data-value="number">▲</button><button class="sort p_dec" data-value="number">▼</button></th>
+                <th style="width: 70px;">획득경로<br><button class="sort p_inc" data-value="string">▲</button><button class="sort p_dec" data-value="string">▼</button></th>
+                <th style="width: 80px;">상태/방출<br><button class="sort p_inc" data-value="string">▲</button><button class="sort p_dec" data-value="string">▼</button></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="subresult" style="position:relative; top:60px;" id="searchInvenPlayers">
+        이름으로 검색: <input type="text" id="targetInvenPlayerName" style="width: 200px; background-color: #8dcfe6; vertical-align: middle;">
+        <button class="normalButton" type="submit" id="invenPlayerFetchBtn" style="width: 100px; height: 30px;">불러오기</button><br>
+        <br>
+        <table align="center">
+          <tr>
+            <th style="width: 120px;">레벨</th>
+            <th style="width: 120px;">나이</th>
+          </tr>
+          <tr>
+            <td style="text-align: center;">
+              <input type="text" id="invenMinLevel" value="1" style="width: 25px;">~<input type="text" id="invenMaxLevel" value="11" style="width: 25px;">
+            </td>
+            <td style="text-align: center;">
+              <input type="text" id="invenMinAge" value="18" style="width: 25px;">~<input type="text" id="invenMaxAge" value="45" style="width: 25px;">
+            </td>
+          </tr>
+        </table>
+        <br>
+        <span style="text-align: left; font-weight: 600;">선수명을 클릭하면 육성 화면으로 이동합니다.</span>
+        <br>
+        <div id="allBatterResult">
+          <h3>일반 선수 (타자)</h3>
+          <table id="allBatterTable" style="text-align: center;" align="center">
+            <thead>
+              <tr>
+                <th style="width: 100px;">선수명</th>
+                <th style="width: 40px;">나이</th>
+                <th style="width: 50px;">소속</th>
+                <th style="width: 50px;">레벨</th>
+                <th style="width: 50px;">포지션</th>
+                <th style="width: 40px;">타격</th>
+                <th style="width: 40px;">정확</th>
+                <th style="width: 40px;">파워</th>
+                <th style="width: 40px;">선구</th>
+                <th style="width: 40px;">주력</th>
+                <th style="width: 40px;">체력</th>
+                <th style="width: 40px;">건강</th>
+                <th style="width: 40px;">정신</th>
+                <th style="width: 40px;">수비</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <br>
+        <div id="allPitcherResult">
+          <h3>일반 선수 (투수)</h3>
+          <table id="allPitcherTable" style="text-align: center;" align="center">
+            <thead>
+              <tr>
+                <th style="width: 100px;">선수명</th>
+                <th style="width: 40px;">나이</th>
+                <th style="width: 50px;">소속</th>
+                <th style="width: 50px;">레벨</th>
+                <th style="width: 50px;">보직</th>
+                <th style="width: 40px;">투구</th>
+                <th style="width: 40px;">구속</th>
+                <th style="width: 40px;">구위</th>
+                <th style="width: 40px;">변화</th>
+                <th style="width: 40px;">제구</th>
+                <th style="width: 40px;">체력</th>
+                <th style="width: 40px;">건강</th>
+                <th style="width: 40px;">정신</th>
+                <th style="width: 40px;">수비</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="subresult" style="position:relative; top:60px;" id="searchTopPlayers">
+        이름으로 검색: <input type="text" id="targetTopPlayerName" style="width: 200px; background-color: #8dcfe6; vertical-align: middle;">
+        <button class="normalButton" type="submit" id="topPlayerFetchBtn" style="width: 100px; height: 30px;">불러오기</button><br>
+        <br>
+        <table align="center">
+          <tr>
+            <th style="width: 140px;">연도</th>
+            <th style="width: 320px;">소속</th>
+            <th style="width: 160px;">투타유형</th>
+            <th style="width: 100px;">나이</th>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-size: small;">
+              <input type="checkbox" checked name="topYear" value="15"> 15 
+              <input type="checkbox" checked name="topYear" value="16"> 16 
+              <input type="checkbox" checked name="topYear" value="17"> 17<br>
+              <input type="checkbox" checked name="topYear" value="18"> 18 
+              <input type="checkbox" checked name="topYear" value="19"> 19 
+              <input type="checkbox" checked name="topYear" value="20"> 20 
+            </td>
+            <td style="text-align: center;">
+              <table align="center" style="font-size: small;">
+                <tr>
+                  <td><input type="checkbox" checked name="topTeam" value="1"> 삼성</td>
+                  <td><input type="checkbox" checked name="topTeam" value="2"> LG</td>
+                  <td><input type="checkbox" checked name="topTeam" value="3"> SK</td>
+                  <td><input type="checkbox" checked name="topTeam" value="4"> Heroes</td>
+                  <td><input type="checkbox" checked name="topTeam" value="5"> 두산</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" checked name="topTeam" value="6"> 롯데</td>
+                  <td><input type="checkbox" checked name="topTeam" value="7"> 한화</td>
+                  <td><input type="checkbox" checked name="topTeam" value="8"> 기아</td>
+                  <td><input type="checkbox" checked name="topTeam" value="18"> NC</td>
+                  <td><input type="checkbox" checked name="topTeam" value="19"> KT</td>
+                </tr>
+              </table>
+            </td>
+            <td style="text-align: center; font-size: small;">
+              <input type="checkbox" checked name="topBatting" value="BL"> 좌타 
+              <input type="checkbox" checked name="topBatting" value="BR"> 우타 
+              <input type="checkbox" checked name="topBatting" value="BS"> 양타<br>
+              <input type="checkbox" checked name="topPitching" value="PL"> 좌투 
+              <input type="checkbox" checked name="topPitching" value="PR"> 우투 
+              <input type="checkbox" checked name="topPitching" value="PU"> 언더
+            </td>
+            <td style="text-align: center;">
+              <input type="text" id="topMinAge" value="18" style="width: 25px;">~<input type="text" id="topMaxAge" value="45" style="width: 25px;">
+            </td>
+          </tr>
+        </table>
+        <br>
+        <span style="text-align: left; font-weight: 600;">선수명을 클릭하면 육성 화면으로 이동합니다.</span>
+        <br>
+        <div id="topBatterResult">
+          <h3>T선수 (타자)</h3>
+          <table id="topBatterTable" style="text-align: center;" align="center">
+            <thead>
+              <tr>
+                <th style="width: 60px;">주차</th>
+                <th style="width: 100px;">선수명</th>
+                <th style="width: 40px;">나이</th>
+                <th style="width: 50px;">소속</th>
+                <th style="width: 50px;">레벨</th>
+                <th style="width: 50px;">포지션</th>
+                <th style="width: 40px;">타격</th>
+                <th style="width: 40px;">정확</th>
+                <th style="width: 40px;">파워</th>
+                <th style="width: 40px;">선구</th>
+                <th style="width: 40px;">주력</th>
+                <th style="width: 40px;">체력</th>
+                <th style="width: 40px;">건강</th>
+                <th style="width: 40px;">정신</th>
+                <th style="width: 40px;">수비</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <br>
+        <div id="topPitcherResult">
+          <h3>T선수 (투수)</h3>
+          <table id="topPitcherTable" style="text-align: center;" align="center">
+            <thead>
+              <tr>
+                <th style="width: 60px;">주차</th>
+                <th style="width: 100px;">선수명</th>
+                <th style="width: 40px;">나이</th>
+                <th style="width: 50px;">소속</th>
+                <th style="width: 50px;">레벨</th>
+                <th style="width: 50px;">보직</th>
+                <th style="width: 40px;">투구</th>
+                <th style="width: 40px;">구속</th>
+                <th style="width: 40px;">구위</th>
+                <th style="width: 40px;">변화</th>
+                <th style="width: 40px;">제구</th>
+                <th style="width: 40px;">체력</th>
+                <th style="width: 40px;">건강</th>
+                <th style="width: 40px;">정신</th>
+                <th style="width: 40px;">수비</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div> <!-- 선수불러오기 -->
+
+    <div class="result" id="managePlayers"> <!-- 선수관리-->
+      <div id="noPlayerMessage">선수검색 탭에서 관리할 선수를 선택해 주세요!</div>
+      <div class="hide" id="playerDetail" style="text-align: center;">
+        <div style="position:fixed; top:50px; z-index: 2;">
+          <img src="/images/background.png">
+        </div>
+        <div class="submenuBox" style="position:fixed; top:80px; padding:0px 0px 10px; width:740px; z-index: 3;">
+          <button class="submenuButton on" style="margin:0 auto;" id="playerStatInfoBtn" type="button">능력치/장비</button>
+          <button class="submenuButton" style="margin:0 auto;" id="playerSpAbilityInfoBtn" type="button">특수능력</button>
+          <button class="submenuButton" style="margin:0 auto;" id="playerTrainingBtn" type="button">선수육성</button>
+        </div>
+        <div class="subresult on" style="position:relative; top:60px; text-align: center;" id="playerStatInfo">
+          <div style="float: left; margin: 0px 10px 0px 30px;">
+            <table align="center">
+              <tr>
+                <th style="width: 90px;"></th>
+                <th style="width: 150px;"></th>
+                <th style="width: 240px;">장비</th>
+              </tr>
+              <tr>
+                <td style="text-align: center;">
+                  <div style="position: absolute; margin: auto;">
+                    <div style="position: relative; top: 0px; left: 14px;">
+                      <img id="playerBreakLimitPic">
+                    </div>
+                    <div style="position: relative; top:-15px; left:37px;">
+                      <img id="playerGradePic" style="height:15px;">
+                    </div>
+                  </div>
+                  <img id="playerPic">
+                </td>
+                <td rowspan="2">
+                  <b><span id="playerName"></span></b><br>
+                  <span id="playerPos"></span>, <span id="playerAge"></span>세<br>
+                  #<span id="playerNo"></span> <button class="normalButton" id="playerNoBtn" style="width: 50px; height: 20px; font-size: small;">Hide</button><br>
+                  Lv. <span id="playerLevel"></span><br>
+                  성장: <span id="playerSpecLite"></span><br>
+                  일반훈련:<br>
+                  <span id="playerGen"></span> > <select id="newGenType"></select> 
+                  <button class="normalButton" id="changeGenBtn" style="width: 40px; height: 20px; font-size: small;">변경</button><br>
+                </td>
+                <td rowspan="2" style="text-align: center;">
+                  세트 효과: <span id="gearSetLite">없음</span>
+                  <table style="text-align: center;">
+                    <tr>
+                      <th style="width: 80px;"><span id="gearNameLite0">헬멧</span></th>
+                      <th style="width: 80px;"><span id="gearNameLite1">배트</span></th>
+                      <th style="width: 80px;"><span id="gearNameLite2">스파이크</span></th>
+                    </tr>
+                    <tr>
+                      <td><span id="gearLite0">없음</span></td>
+                      <td><span id="gearLite1">없음</span></td>
+                      <td><span id="gearLite2">없음</span></td>
+                    </tr>
+                    <tr>
+                      <td><span id="gearLite0_spec0">&nbsp;</span><span id="gearLite0_spec0_add">&nbsp;</span></td>
+                      <td><span id="gearLite1_spec0">&nbsp;</span><span id="gearLite1_spec0_add">&nbsp;</span></td>
+                      <td><span id="gearLite2_spec0">&nbsp;</span><span id="gearLite2_spec0_add">&nbsp;</span></td>
+                    </tr>
+                    <tr>
+                      <td><span id="gearLite0_spec1">&nbsp;</span><span id="gearLite0_spec1_add">&nbsp;</span></td>
+                      <td><span id="gearLite1_spec1">&nbsp;</span><span id="gearLite1_spec1_add">&nbsp;</span></td>
+                      <td><span id="gearLite2_spec1">&nbsp;</span><span id="gearLite2_spec1_add">&nbsp;</span></td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td style="text-align: center;">
+                  경험+<span id="playerExpLevel"></span><br>
+                  <span id="playerExpStar" style="font-size: small; color: gold;"></span>
+                </td>
+              </tr>
+            </table><br>
+            <table align="center">
+              <tr>
+                <th style="width: 30px;"></th>
+                <th style="width: 200px;">순수능력치</th>
+                <th style="width: 20px;"></th>
+                <th style="width: 200px;">최종능력치</th>
+                <th style="width: 30px;"></th>
+              </tr>
+              <tr>
+                <td rowspan="2"></td>
+                <td>
+                  <table>
+                    <tr>
+                      <td><b><span id="statName0">정확:</span></b></td>
+                      <td><span id="stat0"></span></td>
+                      <td style="width: 20px;"></td>
+                      <td><b><span id="statName1">파워:</span></b></td>
+                      <td><span id="stat1"></span></td>
+                    </tr>
+                    <tr>
+                      <td><b><span id="statName2">선구:</span></b></td>
+                      <td><span id="stat2"></span></td>
+                      <td></td>
+                      <td><b><span id="statName3">주력:</span></b></td>
+                      <td><span id="stat3"></span></td>
+                    </tr>
+                    <tr>
+                      <td><b><span id="statName4">체력:</span></b></td>
+                      <td><span id="stat4"></span></td>
+                      <td></td>
+                      <td><b><span id="statName5">건강:</span></b></td>
+                      <td><span id="stat5"></span></td>
+                    </tr>
+                    <tr>
+                      <td><b><span id="statName6">정신:</span></b></td>
+                      <td><span id="stat6"></span></td>
+                      <td></td>
+                      <td><b><span id="statName7">수비:</span></b></td>
+                      <td><span id="stat7"></span></td>
+                    </tr>
+                  </table>
+                </td>
+                <td rowspan="2"></td>
+                <td>
+                  <table>
+                    <tr>
+                      <td><b><span id="statNameFull0">정확:</span></b></td>
+                      <td><span id="statFull0"></span></td>
+                      <td style="width: 20px;"></td>
+                      <td><b><span id="statNameFull1">파워:</span></b></td>
+                      <td><span id="statFull1"></span></td>
+                    </tr>
+                    <tr>
+                      <td><b><span id="statNameFull2">선구:</span></b></td>
+                      <td><span id="statFull2"></span></td>
+                      <td></td>
+                      <td><b><span id="statNameFull3">주력:</span></b></td>
+                      <td><span id="statFull3"></span></td>
+                    </tr>
+                    <tr>
+                      <td><b><span id="statNameFull4">체력:</span></b></td>
+                      <td><span id="statFull4"></span></td>
+                      <td></td>
+                      <td><b><span id="statNameFull5">건강:</span></b></td>
+                      <td><span id="statFull5"></span></td>
+                    </tr>
+                    <tr>
+                      <td><b><span id="statNameFull6">정신:</span></b></td>
+                      <td><span id="statFull6"></span></td>
+                      <td></td>
+                      <td><b><span id="statNameFull7">수비:</span></b></td>
+                      <td><span id="statFull7"></span></td>
+                    </tr>
+                  </table>
+                </td>
+                <td rowspan="2"></td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="submitButton" type="submit" id="growthCalc" style="width: 200px">육성계산</button>
+                </td>
+                <td style="text-align: center;">
+                  <small>* 한계돌파, 앨범, 장비 능력치 포함<br>(특수능력, 길드특능, 코치효과는<br>포함되지 않은 능력치입니다.)</small>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div style="float: right; margin: 0px 30px 0px 10px;">
+            <table style="text-align: center;">
+              <tr>
+                <th style="width: 120px;">특수능력 (<span id="spAbilityCount"></span>)</th>
+              </tr>
+              <tr>
+                <td><span id="spAbility0">&nbsp;</span></td>
+              </tr>
+              <tr>
+                <td><span id="spAbility1">&nbsp;</span></td>
+              </tr>
+              <tr>
+                <td><span id="spAbility2">&nbsp;</span></td>
+              </tr>
+              <tr>
+                <td><span id="spAbility3">&nbsp;</span></td>
+              </tr>
+              <tr>
+                <td><span id="spAbility4">&nbsp;</span></td>
+              </tr>
+              <tr>
+                <td><span id="spAbility5">&nbsp;</span></td>
+              </tr>
+              <tr>
+                <td><span id="spAbility6">&nbsp;</span></td>
+              </tr>
+              <tr>
+                <td><span id="spAbility7">&nbsp;</span></td>
+              </tr>
+              <tr>
+                <td><span id="spAbility8">&nbsp;</span></td>
+              </tr>
+              <tr>
+                <td><span id="spAbility9">&nbsp;</span></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="subresult" style="position:relative; text-align: center; top:60px;" id="playerSpAbilityInfo">
+          <table align="center">
+            <tr>
+              <th style="width:120px; text-align: center;">특수능력</th>
+              <th style="width:20px;"></th>
+              <th style="width:300px;">상세</th>
+            </tr>
+            <tr>
+              <td style="text-align: center;"><span id="spAbility0_name">&nbsp;</span></td>
+              <td></td>
+              <td><span id="spAbility0_detail">&nbsp;</span></td>
+            </tr>
+            <tr>
+              <td style="text-align: center;"><span id="spAbility1_name">&nbsp;</span></td>
+              <td></td>
+              <td><span id="spAbility1_detail">&nbsp;</span></td>
+            </tr>
+            <tr>
+              <td style="text-align: center;"><span id="spAbility2_name">&nbsp;</span></td>
+              <td></td>
+              <td><span id="spAbility2_detail">&nbsp;</span></td>
+            </tr>
+            <tr>
+              <td style="text-align: center;"><span id="spAbility3_name">&nbsp;</span></td>
+              <td></td>
+              <td><span id="spAbility3_detail">&nbsp;</span></td>
+            </tr>
+            <tr>
+              <td style="text-align: center;"><span id="spAbility4_name">&nbsp;</span></td>
+              <td></td>
+              <td><span id="spAbility4_detail">&nbsp;</span></td>
+            </tr>
+            <tr>
+              <td style="text-align: center;"><span id="spAbility5_name">&nbsp;</span></td>
+              <td></td>
+              <td><span id="spAbility5_detail">&nbsp;</span></td>
+            </tr>
+            <tr>
+              <td style="text-align: center;"><span id="spAbility6_name">&nbsp;</span></td>
+              <td></td>
+              <td><span id="spAbility6_detail">&nbsp;</span></td>
+            </tr>
+            <tr>
+              <td style="text-align: center;"><span id="spAbility7_name">&nbsp;</span></td>
+              <td></td>
+              <td><span id="spAbility7_detail">&nbsp;</span></td>
+            </tr>
+            <tr>
+              <td style="text-align: center;"><span id="spAbility8_name">&nbsp;</span></td>
+              <td></td>
+              <td><span id="spAbility8_detail">&nbsp;</span></td>
+            </tr>
+            <tr>
+              <td style="text-align: center;"><span id="spAbility9_name">&nbsp;</span></td>
+              <td></td>
+              <td><span id="spAbility9_detail">&nbsp;</span></td>
+            </tr>
+          </table>
+        </div>
+        <div class="subresult" style="position:relative; top:60px;" id="playerTraining">
+          최대 사용 CP: <input type="number" id="maxCP" step="1" value="1" min="0" style="width: 50px;">만 CP (아래 모든 부분에 적용됩니다.)
+          <button class="normalButton" id="getCP" style="width: 120px; height: 25px; font-size: small;">잔여 CP 불러오기</button><br><br>
+          <table align="center">
+            <tr>
+              <th style="width: 180px;">경험전수/자세교정</th>
+              <th style="width: 280px;">장비강화</th>
+              <th style="width: 200px;">특수능력 훈련</th>
+            </tr>
+            <tr>
+              <td>
+                현재 경험전수 레벨: <span id="playerExp"></span><br>
+                목표 레벨: <input type="number" id="targetExp" step="1" value="5" min="1" max="5" style="width: 30px;"><br>
+                <button class="submitButton" type="submit" id="goExp" style="width: 160px;">경험전수 시작</button><br>
+                현재 성장특성: <span id="playerSpec"></span><br>
+                목표 성장특성:<br>
+                <select id="targetSpecName" name="targetSpecName" style="width: 70px;">
+                  <option selected>정확</option>
+                  <option>파워</option>
+                  <option>선구</option>
+                  <option>주력</option>
+                  <option>정신</option>
+                  <option>수비</option>
+                </select>
+                <select id="targetSpecLevel" name="targetSpecLevel" style="width: 50px;">
+                  <option selected>A</option>
+                  <option>B</option>
+                  <option>C</option>
+                  <option>D</option>
+                </select><br>
+                <button class="submitButton" type="submit" id="goSpec" style="width: 160px;">자세교정 시작</button>
+              </td>
+              <td>
+                <table style="text-align: center;">
+                  <tr>
+                    <th style="width: 90px;"><span id="gearName0">헬멧</span></th>
+                    <th style="width: 90px;"><span id="gearName1">배트</span></th>
+                    <th style="width: 90px;"><span id="gearName2">스파이크</span></th>
+                  </tr>
+                  <tr>
+                    <td><span id="gear0">없음</span></td>
+                    <td><span id="gear1">없음</span></td>
+                    <td><span id="gear2">없음</span></td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">세트 효과: <span id="gearSet">없음</span></td>
+                  </tr>
+                  <tr>
+                    <td><span id="gear0_spec0">&nbsp;</span></td>
+                    <td><span id="gear1_spec0">&nbsp;</span></td>
+                    <td><span id="gear2_spec0">&nbsp;</span></td>
+                  </tr>
+                  <tr>
+                    <td><span id="gear0_spec1">&nbsp;</span></td>
+                    <td><span id="gear1_spec1">&nbsp;</span></td>
+                    <td><span id="gear2_spec1">&nbsp;</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <select id="gear0_target" name="gear0_target">
+                        <option>랜덤</option>
+                      </select>
+                    </td>
+                    <td>
+                      <select id="gear1_target" name="gear1_target">
+                        <option>랜덤</option>
+                      </select>
+                    </td>
+                    <td>
+                      <select id="gear2_target" name="gear2_target">
+                        <option>랜덤</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><button class="normalButton gearButton" id="gear0_go" style="width: 80px;">강화</button></td>
+                    <td><button class="normalButton gearButton" id="gear1_go" style="width: 80px;">강화</button></td>
+                    <td><button class="normalButton gearButton" id="gear2_go" style="width: 80px;">강화</button></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                전설<br>
+                <textarea rows="1" style="width: 200px;" id="legendSpAbility">불멸자,불사신,타격맨</textarea><br>
+                S특<br>
+                <textarea rows="3" style="width: 200px;" id="sSpAbility">정확,번개,압도,춤추는,타격,에이스,타향,무드,칼날,강철,변화</textarea><br>
+                기타<br>
+                <textarea rows="1" style="width: 200px;" id="otherSpAbility">불사조,아이언맨,타향살이</textarea><br>
+                <input type="checkbox" checked id="ownSpAbility" style="width: 20px; height: 20px;">고특 포함
+                <!--<button class="normalButton" id="getOwnSpAbility" style="width: 70px; height: 30px;">불러오기</button>--><br>
+                <button class="submitButton" id="trainSpAbility" style="width: 200px;">특훈 시작</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div> <!-- 선수관리-->
+
+    <div class="result" id="batterGrowthCalc" style="text-align: center; font-size: 15px;"> <!--타자육성 -->
+      <div style="position:fixed; top:50px; z-index: 2;">
+        <img src="/images/background.png">
+      </div>
+      <div class="submenuBox" style="position:fixed; top:80px; padding:0px 0px 10px; width:740px; z-index: 3;">
+        <button class="submenubutton on" style="margin:0 auto;" id="newBatterGrowthBtn" type="button">New육성</button>
+        <button class="submenuButton" style="margin:0 auto;" id="basicBatterGrowthBtn" type="button">기본육성</button>
+        <button class="submenuButton" style="margin:0 auto;" id="detailBatterGrowthBtn" type="button">상세육성</button>
+      </div>
+      
+
+      <div class="subresult on" style="position:relative; top:60px;" id="basicBatterGrowth">
+        <table align="center">
+          <tr align="center">
+            <th> 특화 </th>
+            <th> 일훈 </th>
+            <th></th>
+            <th> 특화 </th>
+            <th> 일훈 </th>
+            <th></th>
+          </tr>
+          <tr align="center">
+            <td>
+              <select name="b_spec" value="b_con" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="b_drill" value="b_con" style="width:20px;"></td>
+            <td>정확:<input type="number" id="b_con" name="b_bas_stat" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+            <td>
+              <select name="b_spec" value="b_pwr" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="b_drill" value="b_pwr" style="width:20px;"></td>
+            <td>파워:<input type="number" id="b_pwr" name="b_bas_stat" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+          </tr>
+          <tr align="center">
+            <td>
+              <select name="b_spec" value="b_eye" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="b_drill" value="b_eye" style="width:20px;"></td>
+            <td>선구:<input type="number" id="b_eye" name="b_bas_stat" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+            <td>
+              <select name="b_spec" value="b_spd" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="b_drill" value="b_spd" style="width:20px;"></td>
+            <td>주력:<input type="number" id="b_spd" name="b_bas_stat" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+          </tr>
+          <tr align="center">
+            <td>
+              <select name="b_spec" value="b_sta" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="b_drill" value="b_sta" style="width:20px;"></td>
+            <td>체력:<input type="number" id="b_sta" name="b_bas_stat" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+            <td>
+              <select name="b_spec" value="b_fit" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="b_drill" value="b_fit" style="width:20px;"></td>
+            <td>건강:<input type="number" id="b_fit" name="b_bas_stat" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+          </tr>
+          <tr align="center">
+            <td>
+              <select name="b_spec" value="b_men" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="b_drill" value="b_men" style="width:20px;"></td>
+            <td>정신:<input type="number" id="b_men" name="b_bas_stat" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+            <td>
+              <select name="b_spec" value="b_def" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="b_drill" value="b_def" style="width:20px;"></td>
+            <td>수비:<input type="number" id="b_def" name="b_bas_stat" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+          </tr>
+        </table>
+        
+        레벨예상: <span id="b_level">10</span>레벨 <span id="b_perc">99</span>(±1)%
+        <button class="normalButton" type="submit" id="b_update" style="width:80px; height:25px;">Update</button>
+        <br>
+        나이:<input type="number" id="b_age" value="18" style="width:50px;" step="1" min="18" max="45">세 (최소 18세, 최대 45세)
+        <br>
+        5타석 경기수:<input type="number" id="b_cha" value="119" style="width:60px;" step="1" min="0" max="119">/ 119 경기
+        <br>
+        <button class="goBackButton" type="submit" id="b_undo">Undo</button>
+        <button class="submitButton" type="submit" id="b_start">Start</button>
+        <button class="normalButton" type="submit" id="b_reset">Reset</button>
+        <br><br>
+        <button class="normalButton" type="submit" id="b_advanced" style="width: 200px;">상세육성 전환</button><br><br>
+        <table id="b_log" style="text-align: center;" align="center">
+          <thead>
+            <tr>
+              <th style="width: 50px;">나이</th>
+              <th style="width: 80px;">특화</th>
+              <th style="width: 50px;">일훈</th>
+              <th style="width: 100px;">5타석 경기수</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div style="text-align: left;">
+          <br>주의: 현재 성장치 데이터의 부족으로 실제 성장치와 예상 성장치가 차이날 수 있습니다.<br>(특히 91구간과 66구간 이하)
+        </div>
+      </div>
+      <div class="subresult" style="position:relative; top:60px;" id="detailBatterGrowth">
+        <table align="center">
+          <tr align="center">
+            <th colspan="2"> 특화 </th>
+            <th> 일훈 </th>
+            <th></th>
+            <th colspan="2"> 특화 </th>
+            <th> 일훈 </th>
+            <th></th>
+          </tr>
+          <tr align="center">
+            <td>정규</td>
+            <td>토요</td>
+            <td> </td>
+            <td> </td>
+            <td>정규</td>
+            <td>토요</td>
+            <td> </td>
+            <td> </td>
+          </tr>
+          <tr align="center">
+            <td>
+              <select name="b_adv_spec_reg" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="b_adv_spec_sat" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="b_adv_drill" value="b_adv_con" style="width:20px;"></td>
+            <td>정확:<input type="number" name="b_adv_stat" id="b_adv_con" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+            <td>
+              <select name="b_adv_spec_reg" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="b_adv_spec_sat" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="b_adv_drill" value="b_adv_pwr" style="width:20px;"></td>
+            <td>파워:<input type="number" name="b_adv_stat" id="b_adv_pwr" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+          </tr>
+          <tr align="center">
+            <td>
+              <select name="b_adv_spec_reg" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="b_adv_spec_sat" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="b_adv_drill" value="b_adv_eye" style="width:20px;"></td>
+            <td>선구:<input type="number" name="b_adv_stat" id="b_adv_eye" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+            <td>
+              <select name="b_adv_spec_reg" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="b_adv_spec_sat" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="b_adv_drill" value="b_adv_spd" style="width:20px;"></td>
+            <td>주력:<input type="number" name="b_adv_stat" id="b_adv_spd" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+          </tr>
+          <tr align="center">
+            <td>
+              <select name="b_adv_spec_reg" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="b_adv_spec_sat" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="b_adv_drill" value="b_adv_sta" style="width:20px;"></td>
+            <td>체력:<input type="number" name="b_adv_stat" id="b_adv_sta" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+            <td>
+              <select name="b_adv_spec_reg" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="b_adv_spec_sat" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="b_adv_drill" value="b_adv_fit" style="width:20px;"></td>
+            <td>건강:<input type="number" name="b_adv_stat" id="b_adv_fit" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+          </tr>
+          <tr align="center">
+            <td>
+              <select name="b_adv_spec_reg" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="b_adv_spec_sat" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="b_adv_drill" value="b_adv_men" style="width:20px;"></td>
+            <td>정신:<input type="number" name="b_adv_stat" id="b_adv_men" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+            <td>
+              <select name="b_adv_spec_reg" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="b_adv_spec_sat" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="b_adv_drill" value="b_adv_def" style="width:20px;"></td>
+            <td>수비:<input type="number" name="b_adv_stat" id="b_adv_def" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+          </tr>
+        </table>
+        
+        레벨예상: <span id="b_adv_level">10</span>레벨 <span id="b_adv_perc">99</span>(±1)%
+        <button class="normalButton" type="submit" id="b_adv_update" style="width:80px; height:25px;">Update</button>
+        <br>
+        나이:<input type="number" id="b_adv_age" value="18" style="width:50px;" step="1" min="18" max="45">세 (최소 18세, 최대 45세)
+        <br>
+        잔여 정규시즌 5타석 경기수:<input type="number" id="b_adv_cha" value="119" style="width:60px;" step="1" min="0" max="119">/ 총 <input type="number" id="b_adv_total" value="119" style="width:60px;" step="1" min="0" max="119"> 경기
+        <br>
+        <button class="normalButton" type="submit" id="load_totalGame" style="width:200px;">잔여경기수 불러오기</button>
+        <br>
+        <input type="checkbox" id="b_adv_sat" style="width:20px; height:15px;"> 토요리그 5타석 경기수:<input type="number" id="b_adv_satCha" value="21" style="width:60px;" step="1" min="0" max="21">/ 총 <input type="number" id="b_adv_satTotal" value="21" style="width:60px;" step="1" min="0" max="21"> 경기
+        <br>
+        <button class="goBackButton" type="submit" id="b_adv_undo">Undo</button>
+        <button class="submitButton" type="submit" id="b_adv_start">Start</button>
+        <button class="normalButton" type="submit" id="b_adv_reset">Reset</button>
+        <br><br>
+        <button class="normalButton" type="submit" id="b_basic" style="width: 200px;">단순육성 전환</button><br><br>
+        <table id="b_adv_log" style="text-align: center;" align="center">
+          <thead>
+            <tr>
+              <th style="width: 50px;">나이</th>
+              <th style="width: 80px;">특화 (정규)</th>
+              <th style="width: 80px;">특화 (토요)</th>
+              <th style="width: 50px;">일훈</th>
+              <th style="width: 100px;">5타석 (정규)</th>
+              <th style="width: 100px;">5타석 (토요)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div style="text-align: left;">
+          <br>주의: 현재 성장치 데이터의 부족으로 실제 성장치와 예상 성장치가 차이날 수 있습니다.<br>(특히 91구간과 66구간 이하)
+        </div>
+      </div> 
+    </div> <!--타자육성 -->
+
+    <div class="result" id="pitcherGrowthCalc" style="text-align: center; font-size: 15px;"> <!-- 투수육성 -->
+      <div style="position:fixed; top:50px; z-index: 2;">
+        <img src="/images/background.png">
+      </div>
+      <div class="submenuBox" style="position:fixed; top:80px; padding:0px 0px 10px; width:740px; z-index: 3;">
+        <button class="submenuButton on" style="margin:0 auto;" id="basicPitcherGrowthBtn" type="button">기본육성</button>
+        <button class="submenuButton" style="margin:0 auto;" id="detailPitcherGrowthBtn" type="button">상세육성</button>
+      </div>
+      <div class="subresult on" style="position:relative; top:60px;" id="basicPitcherGrowth">
+        <table align="center">
+          <tr align="center">
+            <th> 특화 </th>
+            <th> 일훈 </th>
+            <th></th>
+            <th> 특화 </th>
+            <th> 일훈 </th>
+            <th></th>
+          </tr>
+          <tr align="center">
+            <td>
+              <select name="p_spec" value="p_vel" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="p_drill" value="p_vel" style="width:20px;"></td>
+            <td>구속:<input type="number" name="p_bas_stat" id="p_vel" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+            <td>
+              <select name="p_spec" value="p_pwr" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="p_drill" value="p_pwr" style="width:20px;"></td>
+            <td>구위:<input type="number" name="p_bas_stat" id="p_pwr" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+          </tr>
+          <tr align="center">
+            <td>
+              <select name="p_spec" value="p_brk" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="p_drill" value="p_brk" style="width:20px;"></td>
+            <td>변화:<input type="number" name="p_bas_stat" id="p_brk" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+            <td>
+              <select name="p_spec" value="p_con" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="p_drill" value="p_con" style="width:20px;"></td>
+            <td>제구:<input type="number" name="p_bas_stat" id="p_con" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+          </tr>
+          <tr align="center">
+            <td>
+              <select name="p_spec" value="p_sta" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="p_drill" value="p_sta" style="width:20px;"></td>
+            <td>체력:<input type="number" name="p_bas_stat" id="p_sta" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+            <td>
+              <select name="p_spec" value="p_fit" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="p_drill" value="p_fit" style="width:20px;"></td>
+            <td>건강:<input type="number" name="p_bas_stat" id="p_fit" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+          </tr>
+          <tr align="center">
+            <td>
+              <select name="p_spec" value="p_men" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="p_drill" value="p_men" style="width:20px;"></td>
+            <td>정신:<input type="number" name="p_bas_stat" id="p_men" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+            <td>
+              <select name="p_spec" value="p_def" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="p_drill" value="p_def" style="width:20px;"></td>
+            <td>수비:<input type="number" name="p_bas_stat" id="p_def" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+          </tr>
+        </table>
+        
+        레벨예상: <span id="p_level">10</span>레벨 <span id="p_perc">99</span>(±1)%
+        <button class="normalButton" type="submit" id="p_update" style="width:80px; height:25px;">Update</button>
+        <br>
+        나이:<input type="number" id="p_age" value="18" style="width:50px;" step="1" min="18" max="45">세 (최소 18세, 최대 45세)
+        <br>
+        와리:<input type="number" id="p_war" value="1" style="width:50px;" step="0.1" min="0" max="3.3">모 (최소 0모, 최대 3.3모)
+        <br>
+        <button class="goBackButton" type="submit" id="p_undo">Undo</button>
+        <button class="submitButton" type="submit" id="p_start">Start</button>
+        <button class="normalButton" type="submit" id="p_reset">Reset</button>
+        <br><br>
+        <button class="normalButton" type="submit" id="p_advanced" style="width: 200px;">상세육성 전환</button><br><br>
+        <table id="p_log" style="text-align: center;" align="center">
+          <thead>
+            <tr>
+              <th style="width: 50px;">나이</th>
+              <th style="width: 50px;">와리</th>
+              <th style="width: 80px;">특화</th>
+              <th style="width: 50px;">일훈</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div style="text-align: left;">
+          <br>주의: 현재 성장치 데이터의 부족으로 실제 성장치와 예상 성장치가 차이날 수 있습니다.<br>(특히 91구간과 66구간 이하)
+        </div>
+      </div>
+      <div class="subresult" style="position:relative; top:60px;" id="detailPitcherGrowth">
+        <table align="center">
+          <tr align="center">
+            <th colspan="4"> 특화 </th>
+            <th> 일훈 </th>
+            <th></th>
+            <th colspan="4"> 특화 </th>
+            <th> 일훈 </th>
+            <th></th>
+          </tr>
+          <tr align="center">
+            <td>1모</td><td>2모</td><td>3모</td><td>4모</td>
+            <td> </td>
+            <td> </td>
+            <td>1모</td><td>2모</td><td>3모</td><td>4모</td>
+            <td> </td>
+            <td> </td>
+          </tr>
+          <tr align="center">
+            <td>
+              <select name="p_adv_spec_0" value="p_adv_vel" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_1" value="p_adv_vel" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_2" value="p_adv_vel" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_3" value="p_adv_vel" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="p_adv_drill" value="p_adv_vel" style="width:20px;"></td>
+            <td>구속:<input type="number" name="p_adv_stat" id="p_adv_vel" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+            <td>
+              <select name="p_adv_spec_0" value="p_adv_pwr" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_1" value="p_adv_pwr" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_2" value="p_adv_pwr" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_3" value="p_adv_pwr" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="p_adv_drill" value="p_adv_pwr" style="width:20px;"></td>
+            <td>구위:<input type="number" name="p_adv_stat" id="p_adv_pwr" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+          </tr>
+          <tr align="center">
+            <td>
+              <select name="p_adv_spec_0" value="p_adv_brk" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_1" value="p_adv_brk" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_2" value="p_adv_brk" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_3" value="p_adv_brk" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="p_adv_drill" value="p_adv_brk" style="width:20px;"></td>
+            <td>변화:<input type="number" name="p_adv_stat" id="p_adv_brk" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+            <td>
+              <select name="p_adv_spec_0" value="p_adv_con" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_1" value="p_adv_con" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_2" value="p_adv_con" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_3" value="p_adv_con" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="p_adv_drill" value="p_adv_con" style="width:20px;"></td>
+            <td>제구:<input type="number" name="p_adv_stat" id="p_adv_con" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+          </tr>
+          <tr align="center">
+            <td>
+              <select name="p_adv_spec_0" value="p_adv_sta" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_1" value="p_adv_sta" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_2" value="p_adv_sta" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_3" value="p_adv_sta" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="p_adv_drill" value="p_adv_sta" style="width:20px;"></td>
+            <td>체력:<input type="number" name="p_adv_stat" id="p_adv_sta" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+            <td>
+              <select name="p_adv_spec_0" value="p_adv_fit" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_1" value="p_adv_fit" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_2" value="p_adv_fit" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_3" value="p_adv_fit" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="p_adv_drill" value="p_adv_fit" style="width:20px;"></td>
+            <td>건강:<input type="number" name="p_adv_stat" id="p_adv_fit" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+          </tr>
+          <tr align="center">
+            <td>
+              <select name="p_adv_spec_0" value="p_adv_men" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_1" value="p_adv_men" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_2" value="p_adv_men" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_3" value="p_adv_men" style="width:40px;">
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="p_adv_drill" value="p_adv_men" style="width:20px;"></td>
+            <td>정신:<input type="number" name="p_adv_stat" id="p_adv_men" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+            <td>
+              <select name="p_adv_spec_0" value="p_adv_def" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_1" value="p_adv_def" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_2" value="p_adv_def" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td>
+              <select name="p_adv_spec_3" value="p_adv_def" style="width:40px;" disabled>
+                <option>-</option>
+              </select>
+            </td>
+            <td><input type="radio" name="p_adv_drill" value="p_adv_def" style="width:20px;"></td>
+            <td>수비:<input type="number" name="p_adv_stat" id="p_adv_def" step="0.01" value="99.99" min="26.00" max="99.99"></td>
+          </tr>
+        </table>
+        
+        레벨예상: <span id="p_adv_level">10</span>레벨 <span id="p_adv_perc">99</span>(±1)%
+        <button class="normalButton" type="submit" id="p_adv_update" style="width:80px; height:25px;">Update</button>
+        <br>
+        나이:<input type="number" id="p_adv_age" value="18" style="width:50px;" step="1" min="18" max="45">세 (최소 18세, 최대 45세)
+        <br>
+        와리:<input type="number" id="p_adv_war" value="1" style="width:50px;" step="0.1" min="0" max="3.3">모 (최소 0모, 최대 3.3모)
+        <br>
+        <button class="goBackButton" type="submit" id="p_adv_undo">Undo</button>
+        <button class="submitButton" type="submit" id="p_adv_start">Start</button>
+        <button class="normalButton" type="submit" id="p_adv_reset">Reset</button>
+        <br><br>
+        <button class="normalButton" type="submit" id="p_basic" style="width: 200px;">단순육성 전환</button><br><br>
+        <table id="p_adv_log" style="text-align: center;" align="center">
+          <thead>
+            <tr>
+              <th style="width: 50px;">나이</th>
+              <th style="width: 50px;">와리</th>
+              <th style="width: 80px;">특화 (1모)</th>
+              <th style="width: 80px;">특화 (2모)</th>
+              <th style="width: 80px;">특화 (3모)</th>
+              <th style="width: 80px;">특화 (4모)</th>
+              <th style="width: 50px;">일훈</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div style="text-align: left;">
+          <br>주의: 현재 성장치 데이터의 부족으로 실제 성장치와 예상 성장치가 차이날 수 있습니다.<br>(특히 91구간과 66구간 이하)
+        </div>
+      </div>
+    </div> <!-- 투수육성 -->
+
+    <div class="result" id="lineup">
+      <div style="position:fixed; top:50px; z-index: 2;">
+        <img src="/images/background.png">
+      </div>
+      <div class="submenuBox" style="text-align: center; font-size: 15px; position:fixed; top:80px; padding:0px 0px 10px; width:740px; z-index: 3;">
+        <button class="submenuButton on" style="margin:0 auto;" id="batterPanelBtn" type="button">타자</button>
+        <button class="submenuButton" style="margin:0 auto;" id="pitcherPanelBtn" type="button">투수</button>
+      </div>
+      <div style="position: relative; top: 60px;">
+        <div style="float: left;">
+          선택된 선수들 불러오기 <button class="normalButton" id="getSelectedPlayers" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          현재 라인업 불러오기 <button class="normalButton" id="getCurrentPlayers" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>    
+        </div>
+        <div style="float: right; text-align: right; margin-right: 10px;">
+          선수 0명 <br>
+          레벨캡 주전 0 / 대타 0
+        </div>
+      </div>
+      <div class="subresult on" style="position:relative; top:60px;" id="batterPanel">
+        <div id="playerCard_LF" data-value="OF" class="playerCard batterCard left">
+          좌익 <select class="playerSelect" id="playerSelect_LF">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="LF" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_CF" data-value="OF" class="playerCard batterCard">
+          중견 <select class="playerSelect" id="playerSelect_CF">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="CF" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_RF" data-value="OF" class="playerCard batterCard">
+          우익 <select class="playerSelect" id="playerSelect_RF">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="RF" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_SUB2" data-value="DH" class="playerCard batterCard sub" style="margin-left: 20px;">
+          대타2 <select class="playerSelect sub" id="playerSelect_SUB2">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="SUB2" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_SS" data-value="SS" class="playerCard batterCard left" style="margin-left: 90px;">
+          유격 <select class="playerSelect" id="playerSelect_SS">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="SS" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_2B" data-value="2B" class="playerCard batterCard">
+          2루 <select class="playerSelect" id="playerSelect_2B">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="2B" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_SUB3" data-value="DH" class="playerCard batterCard sub" style="margin-left: 115px;">
+          대타3 <select class="playerSelect sub" id="playerSelect_SUB3">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="SUB3" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_3B" data-value="3B" class="playerCard batterCard left">
+          3루 <select class="playerSelect" id="playerSelect_3B">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="3B" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="playerCard dummy"></div>
+
+        <div id="playerCard_1B" data-value="1B" class="playerCard batterCard">
+          1루 <select class="playerSelect" id="playerSelect_1B">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="1B" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_SUB4" data-value="DH" class="playerCard batterCard sub" style="margin-left: 20px;">
+          대타4 <select class="playerSelect sub" id="playerSelect_SUB4">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="SUB4" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_DH" data-value="DH" class="playerCard batterCard left">
+          지명 <select class="playerSelect" id="playerSelect_DH">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="DH" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_C" data-value="C" class="playerCard batterCard">
+          포수 <select class="playerSelect" id="playerSelect_C">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="C" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_SUB1" data-value="DH" class="playerCard batterCard sub" style="margin-left: 20px;">
+          대타1 <select class="playerSelect sub" id="playerSelect_SUB1">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="SUB1" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_SUB5" data-value="DH" class="playerCard batterCard sub">
+          대타5 <select class="playerSelect sub" id="playerSelect_SUB5">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="SUB5" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+      <div class="subresult" style="position:relative; top:60px;" id="pitcherPanel">
+        <div id="playerCard_SP1" data-value="SP" class="playerCard pitcherCard left">
+          1선발 <select class="playerSelect pit" id="playerSelect_SP1">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="SP1" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_SP2" data-value="SP" class="playerCard pitcherCard">
+          2선발 <select class="playerSelect pit" id="playerSelect_SP2">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="SP2" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_SP3" data-value="SP" class="playerCard pitcherCard">
+          3선발 <select class="playerSelect pit" id="playerSelect_SP3">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="SP3" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_SP4" data-value="SP" class="playerCard pitcherCard left">
+          4선발 <select class="playerSelect pit" id="playerSelect_SP4">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="SP4" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_SP5" data-value="SP" class="playerCard pitcherCard">
+          5선발 <select class="playerSelect pit" id="playerSelect_SP5">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="SP5" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_SP6" data-value="SP" class="playerCard pitcherCard">
+          6선발 <select class="playerSelect pit" id="playerSelect_SP6">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="SP6" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_RPA1" data-value="RP" class="playerCard pitcherCard left">
+          계투A1 <select class="playerSelect pit" id="playerSelect_RPA1">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="RPA1" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_RPA2" data-value="RP" class="playerCard pitcherCard">
+          계투A2 <select class="playerSelect pit" id="playerSelect_RPA2">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="RPA2" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_RPA3" data-value="RP" class="playerCard pitcherCard">
+          계투A3 <select class="playerSelect pit" id="playerSelect_RPA3">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="RPA3" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_SU" data-value="SU" class="playerCard pitcherCard">
+          셋업 <select class="playerSelect" id="playerSelect_SU">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="SU" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_RPB1" data-value="RP" class="playerCard pitcherCard left">
+          계투B1 <select class="playerSelect pit" id="playerSelect_RPB1">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="RPB1" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="playerCard_RPB2" data-value="RP" class="playerCard pitcherCard">
+          계투B2 <select class="playerSelect pit" id="playerSelect_RPB2">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="RPB2" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="playerCard dummy"></div>
+
+        <div id="playerCard_CP" data-value="CP" class="playerCard pitcherCard">
+          마무리 <select class="playerSelect pit" id="playerSelect_CP">
+            <option value="0" class="playerSelectOption">-</option>
+          </select>
+          <button class="normalButton getPlayerButton" value="CP" style="width: 30px; height: 15px; font-size: smaller; line-height: 1;">Get</button><br>
+          <table>
+            <tr>
+              <td style="width: 64px;">
+                <div style="position: absolute;">
+                  <div style="position: relative; top: 0px; left: 0px;">
+                    <img class="playerBreakLimitImg">
+                  </div>
+                  <div class="playerGradeImgDiv">
+                    <img class="playerGradeImg">
+                  </div>
+                </div>
+                <img class="playerImg">
+              </td>
+              <td>
+                <table class="playerStat">
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div> <!-- mainFrame -->
+</body>
+
+<script src="jquery-3.5.0.min.js"></script>
+<script src="script.js"></script>
+</html>

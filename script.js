@@ -1,4 +1,4 @@
-function main(){
+async function main(){
 
 	var b_savedStatNum = 0;
 	var b_adv_savedStatNum = 0;
@@ -75,7 +75,7 @@ function main(){
 	const batterSpecLevelArray = ["S","A","B","C","D"];
 	const pitcherSpecLevelArray = ["S","A","B","C","D"];
 
-	var addStatInfo = jQuery.getJSON("addStatInfo.json");
+	var addStatInfo = await jQuery.getJSON("addStatInfo.json");
 
 	const tabArray = [ // 반드시 탭 순서대로 넣을 것
 		document.getElementById("home"),
@@ -108,165 +108,6 @@ function main(){
 	}
 
 	// 타자 육성 시작
-
-	function b_calculateStat(initStatArray,initAge,initStatGiven){ // 타자 성장 계산
-	
-		var drill = document.getElementsByName("b_drill");
-		var spec = document.getElementsByName("b_spec");
-		spec = Array.from(spec);
-
-		var log = document.getElementById("b_log");
-
-		for (i = 0; i<8; i++){
-			drill[i].checked = false;
-			spec[i].innerHTML = "<option>-</option>";
-			for (let level of batterSpecLevelArray) {
-				spec[i].innerHTML += "<option>"+level+"</option>";
-			}
-			spec[i].selectedIndex = 0;
-		} // 일훈 특화 초기화 (항상)
-
-		var stat = document.getElementsByName("b_bas_stat");
-		stat = Array.from(stat);
-
-		var level = document.getElementById("b_level");
-		var perc = document.getElementById("b_perc");
-
-		var age = document.getElementById("b_age");
-		var chance = document.getElementById("b_cha");
-
-		if(initStatGiven){
-			for (let i=0; i<8; i++) {
-				stat[i].value = (initStatArray[i]/10000).toFixed(2);
-			}
-			level.innerText = getLevelPerc(initStatArray,"B").level;
-			perc.innerText = getLevelPerc(initStatArray,"B").perc;
-
-			age.value = initAge;
-			chance.value = 119;
-
-			initTable(log);
-
-			b_statArray.length = 0;
-			b_savedStatNum = 0;
-		} // 최초스탯이 주어진 경우 최초스탯으로 설정 및 기록 초기화
-	
-		document.getElementById("b_undo").onclick = async function(){
-			if(b_savedStatNum>0){
-				for (let i=0; i<8; i++) {
-					stat[i].value = (b_statArray[b_savedStatNum-1].stat[i]/10000).toFixed(2);
-					drill[i].checked = (i==b_statArray[b_savedStatNum-1].drillMarker);
-					spec[i].selectedIndex = (i==b_statArray[b_savedStatNum-1].specMarker ? specLevelInfo[b_statArray[b_savedStatNum-1].specLevel]:0);
-				}
-				level.innerText = b_statArray[b_savedStatNum-1].level;
-				perc.innerText = b_statArray[b_savedStatNum-1].perc;
-
-				age.value = b_statArray[b_savedStatNum-1].age;
-				chance.value = b_statArray[b_savedStatNum-1].chance;
-
-				log.getElementsByTagName("tbody")[0].deleteRow(b_savedStatNum-1);
-
-				b_savedStatNum--;
-				b_statArray.length = b_savedStatNum;
-			}
-			else{
-				alert("저장된 데이터가 없습니다!");
-			}
-		}
-	
-		document.getElementById("b_reset").onclick = function(){
-			b_statArray.length = 0;
-			b_savedStatNum = 0;
-			for (i=0; i<8; i++) {
-				stat[i].value = 99.99;
-			}
-
-			level.innerText = 10;
-			perc.innerText = 99;
-
-			initTable(log);
-	
-			age.value = 18; // 나이 초기화
-			chance.value = 119; // 5타석 경기수 초기화
-		}
-	
-		document.getElementById("b_start").onclick = async function(){
-			if (age.value > 45) {
-				alert("최대 나이는 45세입니다.")
-			} else if (spec.filter(elt => elt.selectedIndex>0).length>1) {
-				alert("특화는 한가지만 선택할 수 있습니다.");
-			} else {
-				var specMarker = -1;
-				var specLevel = "";
-				var drillMarker = -1;
-				if (spec.filter(elt => elt.selectedIndex>0).length==1) {
-					specMarker = spec.indexOf(spec.filter(elt =>elt.selectedIndex>0)[0]);
-					specLevel = spec.filter(elt =>elt.selectedIndex>0)[0].value;
-				}
-				if (specLevel == "S" && age.value >35) {
-					alert("부스터는 35세까지만 가능합니다.");
-				} else {
-					for (let i=0; i<8; i++) {
-						if (drill[i].checked) {
-							drillMarker = i;
-							break;
-						}
-					}
-					var oldData = new Object();
-					oldData.stat = [];
-					for (let i=0; i<8; i++) {
-						oldData.stat.push(Number(stat[i].value*10000));
-					}
-					oldData.bp = "B";
-					oldData.level = level.innerText;
-					oldData.perc = perc.innerText;
-					oldData.age = Number(age.value);
-					oldData.chance = Number(chance.value);
-					oldData.specMarker = specMarker;
-					oldData.specLevel = specLevel;
-					oldData.drillMarker = drillMarker;
-					b_statArray.push(oldData);
-					var tdArray = [
-						{"text":oldData.age}, // 나이
-						{"text":(specMarker!=-1?specNameInfoKor[oldData.bp][oldData.specMarker] + " " + oldData.specLevel:"-")}, // 특화
-						{"text":(drillMarker!=-1?specNameInfoKor[oldData.bp][oldData.drillMarker]:"-")}, // 일훈
-						{"text":oldData.chance+"/119"} // 5타석
-					]
-					var newRow = makeRow(tdArray);
-					log.children[1].appendChild(newRow);
-					
-					var newData = JSON.parse(JSON.stringify(oldData));
-					for (let i=0; i<119; i++) {
-						newData = await oneGameGrowth(newData,i,119);
-					}
-					for (let i=0; i<8; i++) {
-						stat[i].value = (newData.stat[i]/10000).toFixed(2);
-					}
-					level.innerText = getLevelPerc(newData.stat,"B").level;
-					perc.innerText = getLevelPerc(newData.stat,"B").perc;
-					age.value = Number(age.value) +1;
-					b_savedStatNum ++;
-				}
-			}
-		}
-
-		document.getElementById("b_update").onclick = function() {
-			var currStatArray = [];
-			for (i=0; i<8; i++) {
-				currStatArray.push(stat[i].value*10000);
-			}
-			level.innerText = getLevelPerc(currStatArray,"B").level;
-			perc.innerText = getLevelPerc(currStatArray,"B").perc;
-		}
-
-		document.getElementById("b_advanced").onclick = function(){
-			var statArray = [];
-			for (i=0; i<8; i++) {
-				statArray.push(stat[i].value*10000);
-			}
-			b_calculateStatAdvanced(statArray,age.value,true);
-		}
-	}
 
 	function b_calculateStatAdvanced(initStatArray,initAge,initStatGiven) { // 타자 상세육성
 		var drill = document.getElementsByName("b_adv_drill");
@@ -492,14 +333,6 @@ function main(){
 			level.innerText = getLevelPerc(currStatArray,"B").level;
 			perc.innerText = getLevelPerc(currStatArray,"B").perc;
 		}
-
-		document.getElementById("b_basic").onclick = function(){
-			var statArray = [];
-			for (i=0; i<8; i++) {
-				statArray.push(stat[i].value*10000);
-			}
-			b_calculateStat(statArray,age.value,true);
-		}
 	}
 
 	function oneGameGrowth(data,gameNo,totalGameNo) {
@@ -576,160 +409,6 @@ function main(){
 	// 타자 육성 끝
 
 	// 투수 육성 시작
-	function p_calculateStat(initStatArray,initAge,initStatGiven){ // 투수 성장 계산
-		
-		var drill = document.getElementsByName("p_drill");
-		var spec = document.getElementsByName("p_spec");
-		spec = Array.from(spec);
-
-		for (i = 0; i<8; i++){
-			drill[i].checked = false;
-			spec[i].innerHTML = "<option>-</option>"
-			for (let level of pitcherSpecLevelArray) {
-				spec[i].innerHTML += "<option>"+level+"</option>";
-			}
-			spec[i].selectedIndex = 0;
-		} // 일훈 특화 초기화 (항상)
-
-		var stat = document.getElementsByName("p_bas_stat");
-		stat = Array.from(stat);
-
-		var level = document.getElementById("p_level");
-		var perc = document.getElementById("p_perc");
-
-		var age = document.getElementById("p_age");
-		var wari = document.getElementById("p_war");
-
-		var log = document.getElementById("p_log");
-
-		if(initStatGiven){
-			for (let i=0; i<8; i++) {
-				stat[i].value = (initStatArray[i]/10000).toFixed(2);
-			}
-			level.innerText = getLevelPerc(initStatArray,"P").level;
-			perc.innerText = getLevelPerc(initStatArray,"P").perc;
-			age.value = initAge;
-			wari.value = 1;
-			initTable(log);
-			p_statArray.length = 0;
-			p_savedStatNum = 0;
-		} // 최초스탯이 주어진 경우 최초스탯으로 설정 및 기록 초기화
-	
-		document.getElementById("p_undo").onclick = function(){
-			if(p_savedStatNum>0){
-				for (let i=0; i<8; i++) {
-					stat[i].value = (p_statArray[p_savedStatNum-1].stat[i]/10000).toFixed(2);
-					drill[i].checked = (i==p_statArray[p_savedStatNum-1].drillMarker);
-					spec[i].selectedIndex = (i==p_statArray[p_savedStatNum-1].specMarker ? specLevelInfo[p_statArray[p_savedStatNum-1].specLevel]:0);
-				}
-				level.innerText = p_statArray[p_savedStatNum-1].level;
-				perc.innerText = p_statArray[p_savedStatNum-1].perc;
-				age.value = p_statArray[p_savedStatNum-1].age;
-				wari.value = p_statArray[p_savedStatNum-1].wari;
-				log.getElementsByTagName("tbody")[0].deleteRow(p_savedStatNum-1);
-
-				p_savedStatNum--;
-				p_statArray.length = p_savedStatNum;
-			} else{
-				alert("저장된 데이터가 없습니다!");
-			}
-		}
-	
-		document.getElementById("p_reset").onclick = function(){
-			p_statArray.length = 0;
-			p_savedStatNum = 0;
-			for (i=0;i<8;i++) {
-				stat[i].value = 99.99;
-			}
-
-			level.innerText = 10;
-			perc.innerText = 99;
-
-			initTable(log);
-	
-			age.value = 18; // 나이 초기화
-			wari.value = 1; // 와리수 초기화
-		}
-	
-		document.getElementById("p_start").onclick = async function(){
-
-			if (age.value > 45) {
-				alert("최대 나이는 45세입니다.")
-			} else if (spec.filter(elt => elt.selectedIndex>0).length>1) {
-				alert("특화는 한가지만 선택할 수 있습니다.");
-			} else {
-				var specMarker = -1;
-				var specLevel = "";
-				var drillMarker = -1;
-				if (spec.filter(elt => elt.selectedIndex>0).length==1) {
-					specMarker = spec.indexOf(spec.filter(elt =>elt.selectedIndex>0)[0]);
-					specLevel = spec.filter(elt =>elt.selectedIndex>0)[0].value;
-				}
-				if (specLevel == "S" && age.value >35) {
-					alert("부스터는 35세까지만 가능합니다.")
-				} else {
-					for (let i=0; i<8; i++) {
-						if (drill[i].checked) {
-							drillMarker = i;
-							break;
-						}
-					}
-					var oldData = new Object();
-					oldData.stat = [];
-					for (let i=0; i<8; i++) {
-						oldData.stat.push(Number(stat[i].value*10000));
-					}
-					oldData.bp = "P";
-					oldData.level = level.innerText;
-					oldData.perc = perc.innerText;
-					oldData.age = Number(age.value);
-					oldData.wari = Number(wari.value);
-					oldData.specMarker = specMarker;
-					oldData.specLevel = specLevel;
-					oldData.drillMarker = drillMarker;
-					p_statArray.push(oldData);
-
-					var tdArray = [
-						{"text":oldData.age}, // 나이
-						{"text":oldData.wari+"모"}, // 와리
-						{"text":(specMarker!=-1?specNameInfoKor[oldData.bp][oldData.specMarker] + " " + oldData.specLevel:"-")}, // 특화
-						{"text":(drillMarker!=-1?specNameInfoKor[oldData.bp][oldData.drillMarker]:"-")} // 일훈
-					]
-					var newRow = makeRow(tdArray);
-					log.children[1].appendChild(newRow);
-
-					var newData = JSON.parse(JSON.stringify(oldData));
-					for (let i=0; i<119; i++) {
-						newData = await oneGameGrowth(newData,i,119);
-					}
-					for (let i=0; i<8; i++) {
-						stat[i].value = (newData.stat[i]/10000).toFixed(2);
-					}
-					level.innerText = getLevelPerc(newData.stat,"P").level;
-					perc.innerText = getLevelPerc(newData.stat,"P").perc;
-					age.value = Number(age.value) +1;
-					p_savedStatNum ++;
-				}
-			}
-		}
-
-		document.getElementById("p_update").onclick = function() {
-			var currStatArray = [];
-			for (i=0; i<8; i++) {
-				currStatArray.push(stat[i].value*10000);
-			}
-			level.innerText = getLevelPerc(currStatArray,"P").level;
-			perc.innerText = getLevelPerc(currStatArray,"P").perc;
-		}
-
-		document.getElementById("p_advanced").onclick = function(){
-			var statArray = [];
-			for (i=0; i<8; i++) {
-				statArray.push(stat[i].value*10000);
-			}
-			p_calculateStatAdvanced(statArray,age.value,true);
-		}
-	}
 
 	function p_calculateStatAdvanced(initStatArray,initAge,initStatGiven) { // 투수 상세육성
 
@@ -920,14 +599,6 @@ function main(){
 			}
 			level.innerText = getLevelPerc(currStatArray,"P").level;
 			perc.innerText = getLevelPerc(currStatArray,"P").perc;
-		}
-
-		document.getElementById("p_basic").onclick = function(){
-			var statArray = [];
-			for (i=0; i<8; i++) {
-				statArray.push(stat[i].value*10000);
-			}
-			p_calculateStat(statArray,age.value,true);
 		}
 	}
 

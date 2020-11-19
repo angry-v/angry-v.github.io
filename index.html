@@ -177,14 +177,14 @@ button {
 </head>
 
 <body>
-  <div class="menuBox" style="position:fixed; top:30px; z-index: 3;">
-    <button class="menuButton on" id="batterBtn" type="button">타자육성</button>
-    <button class="menuButton" id="pitcherBtn" type="button">투수육성</button>
+  <div class="menuBox">
+    <button class="menuButton on" style="margin:0 auto;" id="batterBtn" type="button">타자육성</button>
+    <button class="menuButton" style="margin:0 auto;" id="pitcherBtn" type="button">투수육성</button>
   </div> <!-- menuBox -->
 
-  <div class="mainFrame" style="position:relative; top:50px; z-index: 1;">
+  <div class="mainFrame">
     <div class="result on" id="batterGrowthCalc" style="text-align: center; font-size: 15px;"> <!--타자육성 -->   
-      <div class="subresult on" style="position:relative; top:60px;" id="basicBatterGrowth">
+      <div class="subresult" style="position:relative; top:60px;" id="basicBatterGrowth">
         <table align="center">
           <tr align="center">
             <th> 특화 </th>
@@ -287,7 +287,7 @@ button {
           <br>주의: 현재 성장치 데이터의 부족으로 실제 성장치와 예상 성장치가 차이날 수 있습니다.<br>(특히 91구간과 66구간 이하)
         </div>
       </div>
-      <div class="subresult" style="position:relative; top:60px;" id="detailBatterGrowth">
+      <div class="subresult on" style="position:relative; top:60px;" id="detailBatterGrowth">
         <table align="center">
           <tr align="center">
             <th colspan="2"> 특화 </th>
@@ -449,7 +449,7 @@ button {
     </div> <!--타자육성 -->
 
     <div class="result" id="pitcherGrowthCalc" style="text-align: center; font-size: 15px;"> <!-- 투수육성 -->
-      <div class="subresult on" style="position:relative; top:60px;" id="basicPitcherGrowth">
+      <div class="subresult" style="position:relative; top:60px;" id="basicPitcherGrowth">
         <table align="center">
           <tr align="center">
             <th> 특화 </th>
@@ -552,7 +552,7 @@ button {
           <br>주의: 현재 성장치 데이터의 부족으로 실제 성장치와 예상 성장치가 차이날 수 있습니다.<br>(특히 91구간과 66구간 이하)
         </div>
       </div>
-      <div class="subresult" style="position:relative; top:60px;" id="detailPitcherGrowth">
+      <div class="subresult on" style="position:relative; top:60px;" id="detailPitcherGrowth">
         <table align="center">
           <tr align="center">
             <th colspan="4"> 특화 </th>

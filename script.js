@@ -331,12 +331,6 @@ function main(){
 			}
 		}
 
-		document.getElementById("load_totalGame").onclick = async function(){
-			var gameData = await jQuery.getJSON('https://ya9.naver.com/gmc/getheader.nhn');
-			chance.value = 119 - gameData.stat.game_cnt;
-			totalGame.value = chance.value;
-		}
-
 		document.getElementById("b_adv_undo").onclick = function(){
 			if(b_adv_savedStatNum>0){
 				for (let i=0; i<8; i++) {

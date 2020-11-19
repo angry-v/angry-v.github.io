@@ -79,10 +79,10 @@ function main(){
 				case "homeBtn": // 홈
 					break;
 				case "batterBtn": // 타자육성
-					b_adv_calculateStat([],false);
+					b_calculateStatAdvanced([],false);
 					break;
 				case "pitcherBtn": // 투수육성
-					p_adv_calculateStat([],false);
+					p_calculateStatAdvanced([],false);
 					break;
 			}
 		}

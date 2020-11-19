@@ -4,7 +4,7 @@
   
 @import url(https://fonts.googleapis.com/css?family=Noto+Sans+KR:500,400);
 BODY {
-  width: 780px; min-height: 500px; font-family: 'Noto Sans KR', sans-serif; line-height: 25px;
+  width: 500px; min-height: 500px; font-family: 'Noto Sans KR', sans-serif; line-height: 25px;
 }
 input {
   border: none; width:70px; height: 25px;
@@ -178,12 +178,17 @@ button {
 
 <body>
   <div class="menuBox">
-    <button class="menuButton on" style="margin:0 auto;" id="batterBtn" type="button">타자육성</button>
+    <button class="menuButton on" style="margin:0 auto;" id="homeBtn" type="button">홈</button>
+    <button class="menuButton" style="margin:0 auto;" id="batterBtn" type="button">타자육성</button>
     <button class="menuButton" style="margin:0 auto;" id="pitcherBtn" type="button">투수육성</button>
   </div> <!-- menuBox -->
 
   <div class="mainFrame">
-    <div class="result on" id="batterGrowthCalc" style="text-align: center; font-size: 15px;"> <!--타자육성 -->   
+    <div class="result on" id="home"> <!-- 홈 -->
+      원하시는 메뉴를 선택하세요
+    </div> <!-- 홈 -->
+
+    <div class="result" id="batterGrowthCalc" style="text-align: center; font-size: 15px;"> <!--타자육성 -->   
       <div class="subresult" style="position:relative; top:60px;" id="basicBatterGrowth">
         <table align="center">
           <tr align="center">

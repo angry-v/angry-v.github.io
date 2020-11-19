@@ -8,10 +8,6 @@ function main(){
 	let b_adv_statArray = [];
 	let p_statArray = [];
 	let p_adv_statArray = [];
-	var playerArray = [];
-	var invenPlayerArray = [];
-	var topPlayerArray = [];
-	var parser = new DOMParser();
 	
 	var buttons = document.getElementsByClassName("menuButton");
 	buttons = Array.from(buttons);
@@ -50,89 +46,17 @@ function main(){
 			table.getElementsByTagName("tbody")[0].deleteRow(0);
 		}
 	}
-
-	function range (start,end) {
-		var array = [];
-		for (let i = start; i<end+1; i++) {
-			array.push(i);
-		}
-		return array;
-	}
-
-	function convert(target,convertArray,defCase) {
-		for (let i = 0; i<convertArray[0].length; i++) {
-			if (convertArray[0][i] == target) {
-				return convertArray[1][i];
-			}
-		}
-		return defCase;
-	}
-
-	const specNameInfoEng = {
-		"B":["Accr","Pwr","Beye","Runp","Stmn","Hlth","Wilp","Defp"],
-		"P":["Bspd","Bpow","Bbll","Cpow","Stmn","Hlth","Wilp","Defp"]
-	}
-
 	const specNameInfoKor = {
 		"B":["정확","파워","선구","주력","체력","건강","정신","수비"],
 		"P":["구속","구위","변화","제구","체력","건강","정신","수비"]
 	}
-
-	const gearConvertArray = [
-		["accr","pwr","beye","runp","bspd","bpow","bbll","cpow","stmn","hlth","wilp","defp"],
-		["정확","파워","선구","주력","구속","구위","변화","제구","체력","건강","정신","수비"]
-	]
-
-	const posInfo = {
-		"C":"포수", "1B":"1루", "2B":"2루", "3B":"3루", "SS":"유격",
-		"OF":"외야", "LF":"좌익", "CF":"중견", "RF":"우익", "DH":"지명",
-		"SP":"선발", "RP":"계투", "SU":"셋업", "CP":"마무리"
-	}
-
-	const gearNameInfo = {
-		"B":["helmet","bat","spike"],
-		"P":["cap","rosin","glove"]
-	}
 	const specLevelInfo = {
 		"S":1,"A":2,"B":3,"C":4,"D":5
 	}
-	const specNextLevelInfo = {
-		"B":"A","C":"B","D":"C"
-	}
-
-	const teamInfo = {
-		"1":"삼성", "2":"LG", "3":"SK", "4":"Heroes", "5":"두산", "6":"롯데", "7":"한화", "8":"기아", "9":"현대",
-		"10":"쌍방울", "11":"태평양", "12":"빙그레", "13":"청보", "14":"OB", "15":"MBC", "16":"삼미", "17":"해태", "18":"NC", "19":"KT"
-	};
-
-	const genInfo = {
-		"-1":"-", "1":"파워", "2":"정확", "3":"선구", "4":"체력", "5":"수비", "6":"주력", "7":"정신", "8":"건강",
-		"9":"구속", "10":"구위", "11":"제구", "12":"변화", "13":"체력", "14":"수비", "15":"건강", "16":"정신"
-	};
-
 	const batterSpecLevelArray = ["S","A","B","C","D"];
 	const pitcherSpecLevelArray = ["S","A","B","C","D"];
 
-	const spAbilityTypeArray = [
-		{"type":"일반","color":"black;","array":range(1,40).concat(range(51,98),range(110,180),range(447,456),[1014,1016,1040],range(3467,3488))},
-		{"type":"탄생","color":"red;","array":range(41,50).concat(range(99,109),range(3489,3501))},
-		{"type":"전설","color":"blue;","array":range(181,240).concat(range(3434,3446))},
-		{"type":"S","color":"purple;","array":range(1001,1013).concat([1015],range(1017,1039),[1041,1042,1043],range(3457,3466))},
-		{"type":"L일반","color":"orange;","array":range(2001,2043).concat(range(3447,3456))},
-		{"type":"L고특","color":"goldenrod;","array":range(656,683).concat(range(883,1000),range(5001,5022),range(5074,5101))},
-		{"type":"F","color":"skyblue;","array":range(5023,5073)},
-		{"type":"고특","color":"goldenrod;","array":range(241,446).concat(range(457,655),range(684,882),range(3000,3433),range(3502,3811))}
-	];
-
-	const birthSpAbilityInfo = {
-		"41":"해결사","42":"고진감래","43":"잠수함킬러","44":"신토불이","45":"타점제조기","46":"만루사나이","47":"저격수","48":"무드남","49":"가을사나이","50":"광끼폭발",
-		"99":"에이스","100":"불사신","101":"포커페이스","102":"닥터K","103":"쉬는시간","104":"연패탈출","105":"파죽지세","106":"무드남","107":"소방수","108":"레이져맨","109":"가을사나이",
-		"3489":"클러치히터","3490":"슬러거","3491":"외인용병","3492":"출루머신","3493":"타격본능","3494":"불사신","3495":"불멸자","3496":"외인용병","3497":"칼날제구","3498":"클로저","3499":"변화구마스터","3500":"필승조","3501":"불멸자"
-	}
-
-	const gearSpecColorArray = ["black;","\#f0bb01;","\#f98027;","\#e90000;","\#6f4efd;","\#00929b;"];
-
-	var addStatInfo = await jQuery.getJSON("addStatInfo.json");
+	var addStatInfo = jQuery.getJSON("addStatInfo.json");
 
 	const tabArray = [ // 반드시 탭 순서대로 넣을 것
 		document.getElementById("batterGrowthCalc"),

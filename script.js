@@ -87,22 +87,6 @@ function main(){
 
 	// 타자 육성 시작
 
-	document.getElementById('basicBatterGrowthBtn').onclick = function() {
-		document.getElementById('basicBatterGrowthBtn').classList.toggle('on',true);
-		document.getElementById('basicBatterGrowth').classList.toggle('on',true);
-		document.getElementById('detailBatterGrowthBtn').classList.toggle('on',false);
-		document.getElementById('detailBatterGrowth').classList.toggle('on',false);
-		b_calculateStat([],18,false);
-	}
-
-	document.getElementById('detailBatterGrowthBtn').onclick = function() {
-		document.getElementById('detailBatterGrowthBtn').classList.toggle('on',true);
-		document.getElementById('detailBatterGrowth').classList.toggle('on',true);
-		document.getElementById('basicBatterGrowthBtn').classList.toggle('on',false);
-		document.getElementById('basicBatterGrowth').classList.toggle('on',false);
-		b_calculateStatAdvanced([],18,false);
-	}
-
 	function b_calculateStat(initStatArray,initAge,initStatGiven){ // 타자 성장 계산
 	
 		var drill = document.getElementsByName("b_drill");
@@ -258,10 +242,6 @@ function main(){
 			for (i=0; i<8; i++) {
 				statArray.push(stat[i].value*10000);
 			}
-			document.getElementById('detailBatterGrowthBtn').classList.toggle('on',true);
-			document.getElementById('detailBatterGrowth').classList.toggle('on',true);
-			document.getElementById('basicBatterGrowthBtn').classList.toggle('on',false);
-			document.getElementById('basicBatterGrowth').classList.toggle('on',false);
 			b_calculateStatAdvanced(statArray,age.value,true);
 		}
 	}
@@ -502,10 +482,6 @@ function main(){
 			for (i=0; i<8; i++) {
 				statArray.push(stat[i].value*10000);
 			}
-			document.getElementById('basicBatterGrowthBtn').classList.toggle('on',true);
-			document.getElementById('basicBatterGrowth').classList.toggle('on',true);
-			document.getElementById('detailBatterGrowthBtn').classList.toggle('on',false);
-			document.getElementById('detailBatterGrowth').classList.toggle('on',false);
 			b_calculateStat(statArray,age.value,true);
 		}
 	}
@@ -584,23 +560,6 @@ function main(){
 	// 타자 육성 끝
 
 	// 투수 육성 시작
-
-	document.getElementById('basicPitcherGrowthBtn').onclick = function() {
-		document.getElementById('basicPitcherGrowthBtn').classList.toggle('on',true);
-		document.getElementById('basicPitcherGrowth').classList.toggle('on',true);
-		document.getElementById('detailPitcherGrowthBtn').classList.toggle('on',false);
-		document.getElementById('detailPitcherGrowth').classList.toggle('on',false);
-		p_calculateStat([],18,false);
-	}
-
-	document.getElementById('detailPitcherGrowthBtn').onclick = function() {
-		document.getElementById('detailPitcherGrowthBtn').classList.toggle('on',true);
-		document.getElementById('detailPitcherGrowth').classList.toggle('on',true);
-		document.getElementById('basicPitcherGrowthBtn').classList.toggle('on',false);
-		document.getElementById('basicPitcherGrowth').classList.toggle('on',false);
-		p_calculateStatAdvanced([],18,false);
-	}
-	
 	function p_calculateStat(initStatArray,initAge,initStatGiven){ // 투수 성장 계산
 		
 		var drill = document.getElementsByName("p_drill");
@@ -752,10 +711,6 @@ function main(){
 			for (i=0; i<8; i++) {
 				statArray.push(stat[i].value*10000);
 			}
-			document.getElementById("basicPitcherGrowthBtn").classList.toggle('on',false);
-			document.getElementById("basicPitcherGrowth").classList.toggle('on',false);
-			document.getElementById("detailPitcherGrowthBtn").classList.toggle('on',true);
-			document.getElementById("detailPitcherGrowth").classList.toggle('on',true);
 			p_calculateStatAdvanced(statArray,age.value,true);
 		}
 	}
@@ -956,10 +911,6 @@ function main(){
 			for (i=0; i<8; i++) {
 				statArray.push(stat[i].value*10000);
 			}
-			document.getElementById("basicPitcherGrowthBtn").classList.toggle('on',true);
-			document.getElementById("basicPitcherGrowth").classList.toggle('on',true);
-			document.getElementById("detailPitcherGrowthBtn").classList.toggle('on',false);
-			document.getElementById("detailPitcherGrowth").classList.toggle('on',false);
 			p_calculateStat(statArray,age.value,true);
 		}
 	}

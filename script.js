@@ -298,7 +298,6 @@ async function main(){
 					var newData = JSON.parse(JSON.stringify(oldData));
 					newData.specMarker = specMarker0;
 					newData.specLevel = specLevel0;
-					console.log(newData);
 					for (let i=0; i<totalGame.value; i++) {
 						newData = await oneGameGrowth(newData,i,totalGame.value);
 					}

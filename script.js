@@ -84,6 +84,9 @@ function main(){
 			}
 		}
 	}
+	
+	b_calculateStat([],false);
+	p_calculateStat([],false);
 
 	// 타자 육성 시작
 

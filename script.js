@@ -14,6 +14,25 @@ function main(){
 	var results = document.getElementsByClassName("result");
 	results = Array.from(results);
 
+	function makeRow(cellArray) { // 선수 띄울 때 쓰는 함수
+		var row = document.createElement("tr");
+		for (let i=0 ; i<cellArray.length; i++) {
+			var td = document.createElement("td");
+			td.innerText = cellArray[i].text;
+			if("style" in cellArray[i]) {
+				td.setAttribute('style',cellArray[i].style);
+			}
+			if ("class" in cellArray[i]) {
+				td.classList.add(cellArray[i].class);
+			}
+			if ("value" in cellArray[i]) {
+				td.value = cellArray[i].value;
+			}
+			row.appendChild(td);
+		}
+		return row;
+	}
+
 	function getInterval (stat) { // 41 미만 구간 0, ..., 91구간 11
 		if (stat<410000) {
 			return 0;
